@@ -20,4 +20,7 @@ track at Codecademy](http://www.codecademy.com/tracks/python)
 A list of Python references:
     http://python.berkeley.edu
 
+What's in this repository?
+--------------------------
+
 *cheat-sheets*: IPython notebooks illustrating basic concepts
