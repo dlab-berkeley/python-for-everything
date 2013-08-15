@@ -17,7 +17,9 @@ track at Codecademy](http://www.codecademy.com/tracks/python)
  - [Classes/Objects](http://www.codecademy.com/courses/python-intermediate-en-WL8e4?curriculum_id=4f89dab3d788890003000096)
  - [File Input and Output](http://www.codecademy.com/courses/python-intermediate-en-OGNHh?curriculum_id=4f89dab3d788890003000096)
 
-A list of Python references:
+Our "official" course textbook is [Think Python](http://www.greenteapress.com/thinkpython).
+
+A more complete list of Python references:
     http://python.berkeley.edu
 
 What's in this repository?
