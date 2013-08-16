@@ -1,6 +1,9 @@
 python-fundamentals
 ===================
 
+These resources are available at
+http://github.com/dlab-berkeley/python-fundamentals
+
 Materials for teaching and learning at the Python FUNdamentals workshop at UC
 Berkeley's D-lab.
 
@@ -18,6 +21,11 @@ track at Codecademy](http://www.codecademy.com/tracks/python)
  - [File Input and Output](http://www.codecademy.com/courses/python-intermediate-en-OGNHh?curriculum_id=4f89dab3d788890003000096)
 
 Our "official" course textbook is [Think Python](http://www.greenteapress.com/thinkpython).
+
+More help:
+
+ - [Moral support](http://doc.pyschools.com/html/tao.html)
+ - [Help fixing things](http://www.greenteapress.com/thinkpython/html/thinkpython021.html)
 
 A more complete list of Python references:
     http://python.berkeley.edu
