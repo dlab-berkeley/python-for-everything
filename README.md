@@ -7,6 +7,8 @@ http://github.com/dlab-berkeley/python-fundamentals
 Materials for teaching and learning at the Python FUNdamentals workshop at UC
 Berkeley's D-lab.
 
+[Read only access to course slides.](https://docs.google.com/presentation/d/1g1AruB-bni9IBS5Rk9mcEIpUqku0Juq2dn-OSzO3MW4/edit?usp=sharing)
+
 These materials are meant to accompany the following lessons in [the Python
 track at Codecademy](http://www.codecademy.com/tracks/python)
 
