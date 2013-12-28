@@ -1,3 +1,6 @@
 cheat-sheets/Scratch.ipynb
 .ipynb_checkpoints/
 .DS_Store
+.vagrant
+.*.sw[pqo]
+VBoxGuestAdditions.iso
