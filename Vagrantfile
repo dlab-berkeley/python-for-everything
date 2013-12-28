@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
 
-  # Ubuntu's images via vagrantbox.es - about 300 MB bare
+  # Ubuntu's cloud image - about 300 MB bare (pretty awesome)
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box"
 
   # Create a forwarded port mapping which allows access to a specific port
@@ -45,11 +45,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  # On Windows, the VM will mount /vagrant with all modes set, e.g. 777.
+  # This interferes with ansible, within the guest, which doesn't tolerate
+  # an executable inventory file. We only apply this on Windows so there are no
+  # adverse affects on *nix / OSX.
+  if Vagrant::Util::Platform.windows?
+    config.vm.synced_folder ".", "/vagrant", :mount_options=> ["dmode=755","fmode=644"]
+  end
+
+  config.vm.provision "shell", path: "provisioning/bootstrap-ansible.sh"
+
   # VirtualBox specific configuration
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
     # The way VirtualBox is set up, uncommenting the following is the only way
     # to mount the relevant guest additions iso from the VBox application.
+    # With our image you still get a non-graphical (tty) console, though
     # vb.gui = true
 
     # Use VBoxManage to customize the VM. For example to change memory:
