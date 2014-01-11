@@ -11,5 +11,5 @@ apt-get update && \
 apt-get -y install python-pip python-paramiko python-jinja2 python-httplib2 && \
 pip install ansible && \
 # Now run the playbook
-cd /vagrant && \
-ansible-playbook -vv -i ansible-inventory-localhost provisioning/ana_env.yml
+cd /vagrant/provisioning && \
+ansible-playbook -vv -i ansible-inventory-localhost ana_env.yml
