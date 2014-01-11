@@ -4,14 +4,14 @@
       # We can't add repositories using the ansible apt_* commands without
       # pycurl. Note, we only want to update the cache once (in the first apt
       # command)
-      - apt: pkg=python-pycurl state=latest update_cache=yes
+      # - apt: pkg=python-pycurl state=latest update_cache=yes
 
       # Found key via
       # http://pgp.mit.edu:11371/pks/lookup?search=neurodebian&op=vindex
-      - apt_key: url=http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xA5D32F012649A5A9
+      # - apt_key: url=http://pgp.mit.edu:11371/pks/lookup?op=get&search=0xA5D32F012649A5A9
       # We don't need to tell ansible to update the cache for newly added repos
       # - apt_repository: repo='deb http://neurodeb.pirsquared.org data main contrib non-free' state=present
-      - apt_repository: repo='deb http://neurodeb.pirsquared.org precise main contrib non-free' state=present
+      # - apt_repository: repo='deb http://neurodeb.pirsquared.org precise main contrib non-free' state=present
 
       # Additional python packages
       - name: python packages
