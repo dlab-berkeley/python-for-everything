@@ -6,9 +6,9 @@ def test_instructors():
     assert 'Dave' not in B.instructors
 
 def test_types():
-    assert type(B.some_int) == int
-    assert type(B.some_float) == float
-    assert type(B.some_bool) == bool
+    assert type(B.some_int) is int
+    assert type(B.some_float) is float
+    assert type(B.some_bool) is bool
 
 def test_reassignment():
     assert B.my_lucky_number == 9
