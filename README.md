@@ -9,7 +9,14 @@ Berkeley's D-lab.
 
 [Read only access to course slides.](https://docs.google.com/presentation/d/1g1AruB-bni9IBS5Rk9mcEIpUqku0Juq2dn-OSzO3MW4/edit?usp=sharing)
 
-These materials are meant to accompany the following lessons in [the Python
+There are two approaches to going through this material. One is by going through
+the numbered directories in order in the challenges directory. There, you can
+use pytest (or your preferred test runner) to build up the requested code and
+programs.
+
+OR...
+
+These materials may accompany the following lessons in [the Python
 track at Codecademy](http://www.codecademy.com/tracks/python)
 
  - [What is Python, Python Syntax](http://www.codecademy.com/courses/introduction-to-python-6WeG3?curriculum_id=4f89dab3d788890003000096)
