@@ -10,7 +10,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "python_fun"
+  config.vm.box = "saucy64"
+
+  # The url from where the 'config.vm.box' box will be fetched if it
+  # doesn't already exist on the user's system.
+
+  # Ubuntu's cloud image - about 300 MB bare (pretty awesome)
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -47,14 +53,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder ".", "/vagrant", :mount_options=> ["dmode=755","fmode=644"]
   end
 
+  config.vm.provision "shell", path: "provisioning/bootstrap-ansible.sh"
+
   # VirtualBox specific configuration
   config.vm.provider :virtualbox do |vb|
-    # If you want to boot with graphics
+    # Don't boot with headless mode
+    # The way VirtualBox is set up, uncommenting the following is the only way
+    # to mount the relevant guest additions iso from the VBox application.
+    # With our image you still get a non-graphical (tty) console, though
     # vb.gui = true
 
-    # This works on newer Vagrant (tested on 1.4.1), Ubuntu uses
-    # a cloud-credible 512MB by default.
+    # Use VBoxManage to customize the VM. For example to change memory:
+    # vb.customize ["modifyvm", :id, "--memory", "1024"]
+    # This works on newer Vagrant (tested on 1.4.1), the "vanilla" raring64 box
+    # is already set to 2GB, "bento" boxes are at the default 384MB. Ubuntu uses
+    # a cloud-credible 512MB.
     vb.memory = 2048
+
+    # DNS config via the docker team, for more info, see:
+    # https://www.virtualbox.org/manual/ch09.html#nat-adv-dns
+    # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
 end
