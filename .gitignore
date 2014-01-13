@@ -4,3 +4,4 @@ cheat-sheets/Scratch.ipynb
 .vagrant
 .*.sw[pqo]
 VBoxGuestAdditions.iso
+__pycache__

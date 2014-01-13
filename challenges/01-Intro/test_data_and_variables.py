@@ -1,6 +1,8 @@
-# This first example lifted from http://pytest.org/latest/getting-started.html
-def func(x):
-    return x + 1
+# Put your code here
+
+x = 5
+
+# DON'T EDIT ANYTHING BELOW THIS LINE!
 
 def test_answer():
-    assert func(3) == 5
+    assert x == 5
