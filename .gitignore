@@ -5,3 +5,4 @@ cheat-sheets/Scratch.ipynb
 .*.sw[pqo]
 VBoxGuestAdditions.iso
 __pycache__
+*.pyc
