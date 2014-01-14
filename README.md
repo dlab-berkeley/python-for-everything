@@ -12,7 +12,19 @@ Berkeley's D-lab.
 There are two approaches to going through this material. One is by going through
 the numbered directories in order in the challenges directory. There, you can
 use pytest (or your preferred test runner) to build up the requested code and
-programs.
+programs. Confusingly, the pytest command-line program is called `py.test` (for
+historical reasons). From the root python-fundamentals directory (where you'll
+also find this README.md file!), execute:
+
+    cd challenges/01-Intro
+    python A_<tab>
+
+Note that &lt;tab&gt; above means "press the tab key" - that way you don't need to
+type everything out. Now, you've executed your first python script! (or maybe
+your 100th...) To continue, go through each python (.py) file alphabetically.
+For each file, there's an associated test_A_...py file. You run this like so:
+
+    py.test test_A<tab>
 
 OR...
 
@@ -42,4 +54,7 @@ A more complete list of Python references:
 What's in this repository?
 --------------------------
 
-*cheat-sheets*: IPython notebooks illustrating basic concepts
+ - *cheat-sheets*: IPython notebooks illustrating basic concepts
+ - *challenges*: python scripts (starting with capital letters) to progress through
+as you learn, and test scripts (starting with `test_<capital letter>`) to
+scaffold the approach.
