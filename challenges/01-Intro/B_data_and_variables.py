@@ -3,7 +3,7 @@
 # instructors
 
 ## what are our names?
-instructors = ''
+instructors = 'Dav and Rochelle'
 
 # types
 ## Now define some other types of variables
@@ -23,3 +23,5 @@ my_lucky_number = 7
 
 ## Only the most recent variable assignment matters
 print "Dav's lucky number:", my_lucky_number
+
+
