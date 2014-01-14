@@ -9,6 +9,9 @@ Berkeley's D-lab.
 
 [Read only access to course slides.](http://j.mp/dlab-python-fun)
 
+Setup for your programming environment is described in the **`VM-SETUP.md`** file
+(should be available wherever you found this file!).
+
 There are two approaches to going through this material. One is by going through
 the numbered directories in order in the challenges directory. There, you can
 use pytest (or your preferred test runner) to build up the requested code and
