@@ -62,4 +62,5 @@
         with_items:
             # This should automatically set up openBLAS for runtime stuff...
             - libopenblas-base
+            - git
 
