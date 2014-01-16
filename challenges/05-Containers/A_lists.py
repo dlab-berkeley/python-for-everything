@@ -13,4 +13,11 @@
 #your_list = 
 
 
-
+# make the next function return a list by adding the string 'spam' as a last
+# item.
+#
+def add_spam(l):
+    "adds 'spam' to a list `l`"
+    # you'll have to write code here
+    #
+    return l
