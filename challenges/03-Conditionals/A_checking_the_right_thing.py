@@ -37,6 +37,8 @@ charles_is_drinking = True
 ## Note that the tests for the below are very picky about the *exact* output,
 ## so don't change those strings!
 
+## We only check the people who are drinking...
+
 if True: # Again - I'm play it safe and checking everyone, fix this!
     print "Checking Alice"
     if False: # Check her age
