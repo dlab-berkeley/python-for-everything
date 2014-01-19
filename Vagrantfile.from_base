@@ -72,8 +72,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # DNS config via the docker team, for more info, see:
     # https://www.virtualbox.org/manual/ch09.html#nat-adv-dns
-    # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    # Should be more robust across different DHCP leases
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
 end
