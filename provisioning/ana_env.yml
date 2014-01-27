@@ -1,54 +1,27 @@
 - hosts: all
   tasks:
-
-      # We can't add repositories using the ansible apt_* commands without
-      # pycurl. Note, we only want to update the cache once (in the first apt
-      # command)
-      # Note that we don't actually use the apt_* commands in this playbook,
-      # though!
-      - apt: pkg=python-pycurl state=latest update_cache=yes
-
-      # Additional python packages
       - name: python packages
         apt: pkg={{ item }} state=latest
         with_items:
             - python-beautifulsoup
-            # - python-bibtex
-            # - python-biopython
-            # - python-dev
-            # - python-docutils
-            # - python-egenix-mxproxy
-            # - python-egenix-mxstack
-            # - python-egenix-mxtexttools
-            # - python-gadfly
-            # - python-gd
-            # - python-gdata
-            # - python-genetic
-            # - python-geoip
-            # - python-gpgme
-            # - python-htmlgen
-            # - python-htmltmpl
-            # - python-kjbuckets
-            # - cython
             - python-lxml
             - python-matplotlib
-            # - python-mvpa
-            # - python-mvpa-lib
-            # - python-mysqldb
             - python-numpy
-            # - python-openpyxl
             - python-pandas
-            # - python-rpy
             - python-scipy
             - python-sqlalchemy
             - python-sqlite
             - python-tornado
             - python-virtualenv
-            # - python-xlrd
-            # - python-xlwt
-            # - python-xmpp
             - python-zmq
             - python-pytest
+            # Other packages that may interest you...
+            # - cython
+            # - python-mvpa
+            # - python-mvpa-lib
+            # - python-rpy
+            # - python-xlrd
+            # - python-xlwt
 
       - pip: name=ipython version=1.1
       - pip: name=vincent
@@ -60,7 +33,10 @@
       - name: Useful packages for data science and computation
         apt: pkg={{ item }} state=latest
         with_items:
-            # This should automatically set up openBLAS for runtime stuff...
+            # This should automatically set up openBLAS for runtime stuff, but
+            # won't necessarily help with code you compile
             - libopenblas-base
             - git
 
+# TODO - set up user's ssh keys, perhaps also git identity? This could also be
+# done in an interactive setup script...

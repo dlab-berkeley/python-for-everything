@@ -8,7 +8,7 @@ echo Starting $0
 # Note - the && syntax guarantees that we abort if we hit an error
 apt-get update && \
 # Dependencies to install/run ansible
-apt-get -y install python-pip python-paramiko python-jinja2 python-httplib2 && \
+apt-get -y install python-pip python-paramiko python-jinja2 python-yaml python-httplib2 && \
 pip install ansible && \
 # Now run the playbook
 cd /vagrant/provisioning && \
