@@ -4,8 +4,6 @@ import pytest
 def test_can_drink(capsys):
     # Again being a bit funny to grab the print...
     import A_checking_the_right_thing as A
-    assert A.sally_can_drink == False # Using == False to get clearer errors!
-    assert A.john_can_drink == True
     out, _ = capsys.readouterr()
 
     # Here we're being flexible in allowing where folks can print things
