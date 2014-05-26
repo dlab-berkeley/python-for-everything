@@ -2,7 +2,7 @@ import B_data_and_variables as B
 
 def test_instructors():
     assert 'Dav' in B.instructors
-    assert 'Rochelle' in B.instructors
+    assert 'Sean' in B.instructors
     assert 'Dave' not in B.instructors
 
 def test_types():

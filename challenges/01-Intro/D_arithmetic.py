@@ -9,8 +9,6 @@ the_other = 22
 ## add those values together (using only variable names, NOT numbers), and put
 ## the results in a variable called the_answer
 
-
-
 print "The answer is", the_answer
 
 # exponentiation
