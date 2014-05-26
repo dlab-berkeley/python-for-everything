@@ -24,8 +24,8 @@ if False: # conditionals take True or False
 
 ## And again, please take care of john!
 
-## Now, we have a different scenario, we see some folks drinking, who do we need
-## to check?
+## Now, we have a different scenario, we see some folks drinking. Here's the
+## information about the scene before us:
 
 alice_age = 20
 alice_is_drinking = True
@@ -34,10 +34,12 @@ bob_is_drinking = False
 charles_age = 22
 charles_is_drinking = True
 
+## Now, we only check the people who are drinking (and print a message that we
+## are doing so). Then, we say "OK!" if they are 21+, or "This isn't right!" if
+## they are under 21.
+
 ## Note that the tests for the below are very picky about the *exact* output,
 ## so don't change those strings!
-
-## We only check the people who are drinking...
 
 if True: # Again - I'm play it safe and checking everyone, fix this!
     print "Checking Alice"
