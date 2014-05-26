@@ -2,7 +2,7 @@
   "builders": [
     {
       "shutdown_command": "echo 'collaboratool' | sudo -S shutdown -P now",
-      "source_path": "provisioning/Collaboratool-Base32-VB-ovf1.0.ova",
+      "source_path": "Collaboratool-Base32-VB-ovf1.0.ova",
       "ssh_password": "collaboratool",
       "ssh_username": "collaboratool",
       "ssh_wait_timeout": "30s",
