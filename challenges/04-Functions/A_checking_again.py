@@ -18,9 +18,10 @@ def enforce(name, age, is_drinking):
     pass
     # When you check,
     # print "Checking Name!"
-    # but you'll need to set the name
+    # (you'll need to set the name)
+    # Then print "OK!" or "This isn't right!" as appropriate.
 
-## Note that we can define our data before or after a function
+# Note that we can define our data before or after a function
 
 alice_name = "Alice"
 alice_age = 20
@@ -33,9 +34,9 @@ charles_age = 22
 charles_is_drinking = True
 
 enforce(alice_name, alice_age, alice_is_drinking)
-## And so on - do this for Bob and Charles!
+# And so on - do this for Bob and Charles!
 
-## That should've been a LOT less typing!
+# That should've been a LOT less typing!
 
-## When you're done, have a look at the tests, and see how the correspond to the
+# When you're done, have a look at the tests, and see how they correspond to the
 # functions above

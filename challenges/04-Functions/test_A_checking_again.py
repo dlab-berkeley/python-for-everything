@@ -7,9 +7,12 @@ def test_can_drink():
     assert A.can_drink(20) == False
 
 def test_enforce(capsys):
+    '''Notice that we're not restricted to the data in our script.'''
     A.enforce("John", 18, False)
     A.enforce("Chuck", 18, True)
     A.enforce("Bob", 21, True)
+    # Since we specify the operations more tightly, we can be more precise in
+    # what specific lines should be in our test
     out, _ = capsys.readouterr()
     lines = out.split('\n')
     assert lines[0] == "Checking Chuck!"
