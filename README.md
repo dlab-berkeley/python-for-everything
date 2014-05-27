@@ -61,3 +61,5 @@ What's in this repository?
  - *challenges*: python scripts (starting with capital letters) to progress through
 as you learn, and test scripts (starting with `test_<capital letter>`) to
 scaffold the approach.
+
+HAPPY CODING!
