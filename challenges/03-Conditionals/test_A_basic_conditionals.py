@@ -1,7 +1,7 @@
 # Here to trigger an error
 import pytest
 
-import A_checking_the_right_thing as A
+import A_basic_conditionals as A
 
 def test_can_drink(capsys):
     # Again being a bit funny to grab the print...
