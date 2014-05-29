@@ -1,3 +1,5 @@
+import pytest
+
 # A simple test to illustrate if __name__ == '__main__'
 
 import B_script_conventions as B

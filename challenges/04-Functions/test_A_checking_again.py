@@ -1,3 +1,5 @@
+import pytest
+
 import A_checking_again as A
 
 def test_can_drink():
