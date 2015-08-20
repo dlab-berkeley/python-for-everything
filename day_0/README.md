@@ -5,7 +5,11 @@ Probably if you're interested in this topic and didn't take the class, you shoul
 
 Topics:
 
+ - Different approaches to working with Python
+   - Terminal / IPython
+   - IPython notebook
+   - PyCharm
+ - Text analysis
  - Tabular data & options for handling it
  - How to preprocess for graph work
  - Prep for TwitterBot
- - Text analysis (intro to nltk? Or gensim? - Maybe do n-grams & skip-grams)
