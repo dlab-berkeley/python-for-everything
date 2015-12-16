@@ -1,0 +1,55 @@
+# Chapter 12 shoes example from lowry@vassar
+# http://faculty.vassar.edu/lowry/webtext.html
+# Group A avg= 65.8, ss= 378.4, variance= 25.2
+# Group B avg= 64.2, ss= 384.1, variance= 25.6
+#       Ma-Mb=  1.6
+#       ssD = 2.59, variance= 0.17
+# independent t-value= +0.84, not significant
+# paired t-value= +14.17, df= 14
+#       p < 5e-10
+#
+LOAD DATA title "Wearing shoes" Shoes_ON;
+64.8
+70.5
+69.3
+55.5
+61.4
+69.7
+68.8
+64.6
+63.8
+61.9
+69.4
+63.0
+75.5
+69.4
+59.1
+/eof
+LOAD DATA title "With shoes removed" Shoes_OFF;
+63.5
+68.8
+67.6
+54.1
+59.9
+68.6
+66.7
+63.0
+61.8
+59.4
+68.4
+61.1
+73.9
+68.2
+58.1
+/eof
+/
+/--First run uncorrelated t-test
+student
+/
+/--Secondly, set option M to treat as matched pairs
+option M
+Student
+/
+/--Finally, compare resampling results
+iterate 544000
+Resamp
