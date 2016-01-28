@@ -9,8 +9,8 @@ fi
 cd instructor/
 
 for notebook in *.ipynb; do
-    jupyter nbconvert --to python $notebook
-    jupyter nbconvert --allow-errors --to latex $notebook
+    jupyter nbconvert --execute --allow-errors --to python $notebook
+    jupyter nbconvert --execute --allow-errors --to latex $notebook
     xelatex --interaction batchmode ${notebook%\.ipynb}
 done
 
