@@ -28,4 +28,4 @@ Submitting new materials, data, examples, and/or code is a great way to help imp
     - Explain the motivation for your changes
     - Explain what you have changed
 
-##### And thanks!
+**And thanks!**
