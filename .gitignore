@@ -1,3 +1,6 @@
+# Credentials
+creds.*
+
 # Checkpoints
 *.ipynb_checkpoints
 
