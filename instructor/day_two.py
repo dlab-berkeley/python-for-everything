@@ -390,9 +390,12 @@ print(len(link_list))
 
 
 # We now have a list of 175 hyperlinks to loop through for our next section. 
+
+# #### Time for a challenge!
 # 
+# To make sure that everyone is on the same page (and to give you a little more practice dealing with HTML), let's partner up with the person next to you and try challenge A, on using html, in the challenges directory.
+
 # Now using the list, let's load the first page and locate the text elements we want 
-# 
 
 # In[20]:
 
@@ -463,6 +466,10 @@ for one_row in table_elements:
     except Exception:
         continue
 
+
+# #### Let's try a challenge!
+# 
+# Error handling - or having a computer program anticipate and respond to errors created by other functions - is a big part of programming. To give you a little more practice with this, we're going to have you team up with person sitting next to you and try challenge B in the challenges directory.
 
 # Now that we have the data we need, let's store it in a Python dictionary. 
 

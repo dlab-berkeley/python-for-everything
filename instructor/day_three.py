@@ -663,7 +663,7 @@ table.describe()
 
 # ## Inferential statistics
 # 
-# pandas does not have statistical functions baked in, so we are going to call them from the `scipy.stats` library.
+# pandas does not have statistical functions baked in, so we are going to call them from the `scipy.stats` library and the `statmodels` scikit.
 # 
 # We are also going to load in an actual dataset, as stats examples aren't very interesting with tiny bits of fake data.
 
@@ -712,16 +712,72 @@ intermediate = data.dropna(subset=['inside.barriers', 'outside.barriers'])
 stats.pearsonr(intermediate['outside.barriers'], intermediate['inside.barriers'])
 
 
-# Another implementation is to use a linear regression to predict the levels of one variable based on the levels of another. Here, we are predicting the barriers in the D-Lab based on what we know about barriers outside:
+# At this point, we're going to pivot to using `statsmodels`
 
 # In[75]:
 
-stats.linregress(intermediate['outside.barriers'], intermediate['inside.barriers'])
+import statsmodels.formula.api as smf
 
 
-# You'll notice that we haven't done a whole lot of statistical analyses yet. For more robust tests and more kinds of tests, you can look through the algorithms in scipy's machine learning library, [scikit-learn](http://scikit-learn.org/stable/). Another option, according to Scipy's own documentation, is to switch to R:
+# The formulas module in statsmodels lets us work with pandas dataframes, and linear model specifications that are similar to R and other variants of statistical software, e.g.:
 # 
-# > For many more stat related functions install the software R and the interface package rpy
+# ```
+# outcome ~ var1 + var2
+# ```
+
+# In[76]:
+
+model_1 = smf.ols("inside_barriers ~ outside_barriers", data=data).fit()
+model_1
+
+
+# To get a summary of the test results, call the model's `summary` method
+
+# In[77]:
+
+model_1.summary()
+
+
+# Since Python does not have private data or hidden attributes, you can pull out just about any intermediate information you want, including coefficients, residuals, and eigenvalues
+# 
+# > Raymond Hettinger would say that Python is a "consenting adult language"
+
+# In[78]:
+
+model_1.params['outside_barriers']
+
+
+# `statsmodels` also exposes methods for validity checking your regressions, like looking for outliers by influence statistics
+
+# In[79]:
+
+model_1.get_influence().summary_frame()
+
+
+# If, at this stage, you suspect that one or more outliers is unduly influencing your model fit, you can transform your results into robust OLS with a method call:
+
+# In[80]:
+
+model_1.get_robustcov_results().summary()
+
+
+# This isn't very different, so we're probably okay.
+# 
+# If you want to add more predictors to your model, you can do so inside the function string:
+
+# In[81]:
+
+smf.ols("inside_barriers ~ outside_barriers + gender", data=data).fit().summary()
+
+
+# Note that our categorical/factor variable has been automatically one-hot encoded as treatment conditions. There's not way to change this within `statsmodels`, but you can specify your contrasts indirectly using a library called (`Patsy`)[http://statsmodels.sourceforge.net/stable/contrasts.html].
+# 
+# To add interactions to your model, you can use `:`, or `*` [for full factorial]
+
+# In[82]:
+
+smf.ols("inside_barriers ~ outside_barriers * gender", data=data).fit().summary()
+
 
 # # Practice
 # 
@@ -733,8 +789,3 @@ stats.linregress(intermediate['outside.barriers'], intermediate['inside.barriers
 # 2. Which character in Monty Python has the biggest vocabulary?
 # 3. Do different departments have the same gender ratios?
 # 4. What variable in this dataset is the best predictor for how useful people find our workshops to be?
-
-# In[76]:
-
-
-
