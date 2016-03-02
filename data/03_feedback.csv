@@ -1,7 +1,7 @@
-"timestamp","course.delivered","instructor.communicated","hear","interest","department","verbs","useful","gender","ethnicity","outside.barriers","inside.barriers","what.barriers","position"
-2015-04-23,7,6,"Email from the D-Lab mailing list",7,NA,"This was a helpful workshop. 
+"timestamp","course_delivered","instructor_communicated","hear","interest","department","verbs","useful","gender","ethnicity","outside_barriers","inside_barriers","what_barriers","position"
+2015-04-23,7,6,"Email from the D-Lab mailing list",7,NA,"This was a helpful workshop.
 
-Kelly was a clear instructor and knowledgeable of the material. 
+Kelly was a clear instructor and knowledgeable of the material.
 
 Please keep these training sessions coming!",7,"Male/Man","Asian American",2,1,NA,"Visiting fellow or researcher"
 2015-04-23,7,7,"Email from the D-Lab mailing list",7,NA,NA,7,"Male/Man","White",1,1,NA,"Faculty"
@@ -10,7 +10,7 @@ Please keep these training sessions coming!",7,"Male/Man","Asian American",2,1,N
 2015-04-23,7,7,"Email from another mailing list",6,NA,NA,6,"Female/Woman","White",1,1,NA,"Librarian"
 2015-04-23,6,6,NA,7,NA,NA,6,"Male/Man","Decline to state",1,1,NA,"Administrative staff title"
 2015-04-22,3,2,"Found it on the D-Lab website",6,NA,"I felt like this was more of an overview of tools that programmers use rather than an introduction to the theory and basic knowledge of programming itself. For me at least, the latter would have been more helpful, and seemed to be a necessary prerequisite for the material presented here. I appreciate the instructor's friendly attitude, but I didn't get a clear sense of a sense of a trajectory as we progressed from topic to topic.",3,"Male/Man","White",1,1,NA,"PhD student, dissertation stage"
-2015-04-22,6,4,"Email from the D-Lab mailing list",7,NA,"Thank you for this class. I started with basically zero knowledge, so I really appreciate how no previous knowledge was assumed. It was a bit hard to follow as it went on because I think the pace picked up a little and I couldn't see on the screen very well what was going on (lighting, and hard to see the cursor), but overall still glad I came. 
+2015-04-22,6,4,"Email from the D-Lab mailing list",7,NA,"Thank you for this class. I started with basically zero knowledge, so I really appreciate how no previous knowledge was assumed. It was a bit hard to follow as it went on because I think the pace picked up a little and I couldn't see on the screen very well what was going on (lighting, and hard to see the cursor), but overall still glad I came.
 ",7,NA,"Decline to state",NA,NA,NA,NA
 2015-04-22,5,4,"Found it on the D-Lab website",7,NA,"The initial class was far too large, which made it easy to fall behind. Additionally, it would have been much more helpful if we'd periodically stopped to check that everyone was up to speed. I also feel that it would be helpful to have a handout which outlined everything that was going to be covered, so that in case of falling behind, it would be easier to reference the instructions that might have been missed. ",4,"Female/Woman","White",1,1,NA,"PhD student, pre-dissertation"
 2015-04-21,7,7,"Heard about it from a friend/colleague",7,NA,NA,7,"Female/Woman","International",1,1,NA,"Visiting fellow or researcher"
@@ -44,7 +44,7 @@ Please keep these training sessions coming!",7,"Male/Man","Asian American",2,1,N
 2015-04-16,6,7,"Email from the D-Lab mailing list",7,NA,"Both instructors were great. It was nice to have two instructors in order to see slightly different perspectives/experiences. That made concrete the idea that there isn't only one way, or a right way, to do this kind of work, but that there are some common concerns or issues.
 
 It would be helpful to have a workshop/training about managing interview transcripts. (You may have already done this previously and I just didn't notice it!)",6,"Female/Woman","White",4,1,NA,"PhD student, dissertation stage"
-2015-04-15,4,4,NA,6,NA,"The end of the workshop today starting with scrapping the web went too fast. 
+2015-04-15,4,4,NA,6,NA,"The end of the workshop today starting with scrapping the web went too fast.
 
 I would like to see an indesign workshop & an intro to Java training ",4,"Female/Woman","African American/Black",3,3,NA,"PhD student, dissertation stage"
 2015-04-15,6,6,"Found it on the D-Lab website",7,NA,"Thank you ",7,"Female/Woman","White",NA,NA,NA,"Faculty"
@@ -77,7 +77,7 @@ The biggest technical challenge to my work is having the knowledge to create com
 2015-04-10,7,7,"Email from the D-Lab mailing list",7,NA,NA,7,"Female/Woman","White",2,1,NA,"PhD student, dissertation stage"
 2015-04-10,7,7,"Email from the D-Lab mailing list",7,NA,"very nicely interactive session!  the good turnout perhaps meant that folks were at different levels, but all seem to have profited",7,"Male/Man","White",1,2,NA,"Visiting fellow or researcher"
 2015-04-10,7,7,"Email from the D-Lab mailing list",7,NA,"Zawadi is an excellent instructor. She is engaging and very knowledgeable. She was able to answer everyone's questions and gave examples in her explanations. ",6,"Female/Woman","Latino/Chicano",1,1,NA,"Administrative staff title"
-2015-04-10,5,5,"Found it on the D-Lab website",5,NA,"This is for the d3.js workshop (there wasn't an option under the drop down menu) 
+2015-04-10,5,5,"Found it on the D-Lab website",5,NA,"This is for the d3.js workshop (there wasn't an option under the drop down menu)
 Thanks, it was great! ",5,"Female/Woman","Asian American",3,1,NA,"Masters student"
 2015-04-10,7,7,"Email from the D-Lab mailing list",7,NA,"Great training! It was very informative, and was well worth my time.",7,"Female/Woman","White",NA,1,NA,"PhD student, dissertation stage"
 2015-04-10,7,6,"Heard about it from a friend/colleague",7,NA,NA,6,"Female/Woman","Latino/Chicano",1,1,NA,"Undergraduate student"
@@ -191,7 +191,7 @@ thanks!",7,"Female/Woman","White",1,1,NA,"Academic staff title"
 2015-03-12,6,6,"Heard about it from a friend/colleague",7,NA,NA,6,"Female/Woman","Asian American",4,1,NA,NA
 2015-03-12,5,5,"Found it on the D-Lab website",7,"Economics","Cleaning databases",7,"Female/Woman","White",2,1,NA,NA
 2015-03-12,7,7,"Found it on the D-Lab website",7,NA,NA,7,NA,"White",1,1,NA,NA
-2015-03-11,7,7,"Found it on the D-Lab website",7,NA,"I thought  the instructor did a great job.  His approach was  contingent upon working with a relatively small dataset. 
+2015-03-11,7,7,"Found it on the D-Lab website",7,NA,"I thought  the instructor did a great job.  His approach was  contingent upon working with a relatively small dataset.
 ",6,"Male/Man","White",1,1,NA,NA
 2015-03-11,5,5,"Heard about it from a friend/colleague",5,NA,"This session seemed a little fast-paced. Appreciated the prepared do-file for reference. ",5,"Female/Woman","Decline to state",1,1,NA,NA
 2015-03-11,7,6,"Found it on the D-Lab website",7,NA,NA,6,"Female/Woman","White",5,1,NA,NA
@@ -199,7 +199,7 @@ thanks!",7,"Female/Woman","White",1,1,NA,"Academic staff title"
 2015-03-10,7,7,"Email from the D-Lab mailing list",7,"Political Science",NA,7,"Male/Man","White",1,1,NA,NA
 2015-03-10,6,6,"Email from the D-Lab mailing list",6,"Sociology",NA,6,"Female/Woman","Not on the form",1,1,NA,NA
 2015-03-10,6,5,"Email from another mailing list",7,"Public Policy",NA,5,"Male/Man","White",1,1,NA,NA
-2015-03-10,7,7,"Email from the D-Lab mailing list",7,NA,"Challenges: Excel 
+2015-03-10,7,7,"Email from the D-Lab mailing list",7,NA,"Challenges: Excel
 Want to learn more about data research basics. ",7,"Female/Woman","Latino/Chicano",5,4,"Content",NA
 2015-03-09,7,7,"Email from the D-Lab mailing list",7,NA,"Good format, good to have coverage of both Fact Finder and Social Explorer. And it was actually helpful going back and forth between them, because it made it clearer what's actually in the underlying census data. Thank you!",7,NA,"Decline to state",NA,NA,NA,NA
 2015-03-09,4,6,"Email from the D-Lab mailing list",7,"Political Science",NA,5,NA,"Decline to state",NA,NA,NA,NA
@@ -225,7 +225,7 @@ Want to learn more about data research basics. ",7,"Female/Woman","Latino/Chican
 2015-03-03,7,7,"Jon Stiles",7,NA,NA,6,"Male/Man","White",1,1,NA,NA
 2015-03-02,7,7,"Printed Flyer",7,NA,"testing
 ",7,NA,"African American/Black, Asian American, International, Latino/Chicano, Native American/Alaskan Native, White, Not on the form",5,5,"Instructors, Learning materials, Staff, D-Lab students",NA
-2015-03-02,7,7,"Email from the D-Lab mailing list",7,"Education","I think it is helpful when possible to have the materials available for review before the training. 
+2015-03-02,7,7,"Email from the D-Lab mailing list",7,"Education","I think it is helpful when possible to have the materials available for review before the training.
 
 This workshop did this. Made materials available online and that is greatly helpful. Effective use of Github.",7,"Female/Woman","Latino/Chicano",5,4,"Learning materials",NA
 2015-03-01,6,6,NA,7,"Sociology",NA,5,"Male/Man","African American/Black",4,2,NA,NA
@@ -233,7 +233,7 @@ This workshop did this. Made materials available online and that is greatly help
 2015-02-28,7,6,"Found it on the D-Lab website",6,NA,NA,5,"Female/Woman","White",2,1,NA,NA
 2015-02-28,7,6,"Email from the D-Lab mailing list",7,"Economics",NA,2,"Female/Woman","Asian American",2,1,NA,NA
 2015-02-27,6,2,NA,7,NA,"I know this workshop was off to a bit of a rocky start because of the computer problems and maybe more rushed than usual but it was difficult to follow for a couple of reasons.
-1.) The instructor went over the material very rapidly and didn't stop at any point to ask if we had questions.  Pausing and taking questions at the end of each segment or even several times during each segment would have gone a long way to make the material clearer.  He also had another instructor answering questions while he was lecturing, which posed an additional challenge to being able to listen to his lecture while trying to tune out the other instructor who was answering questions simultaneously 
+1.) The instructor went over the material very rapidly and didn't stop at any point to ask if we had questions.  Pausing and taking questions at the end of each segment or even several times during each segment would have gone a long way to make the material clearer.  He also had another instructor answering questions while he was lecturing, which posed an additional challenge to being able to listen to his lecture while trying to tune out the other instructor who was answering questions simultaneously
 
 2.) The workshop was advertised as only needing a beginning level of familiarity with Stata.  But the instructor used a lot of terms that aren't necessarily familiar to people with just an introductory level of familiarity with Stata (e.g. macros, local and global elements, LaTex etc.) without taking the time to clearly define what these terms means, why they are of importance, etc. before launching into the details associated with them, which also made the workshop difficult to follow.  Again, slowing down, and not assuming audience familiarity with the content would have gone a long way to promoting a friendlier environment for learning.
 
@@ -450,7 +450,7 @@ Thank you in advance for your attention to this matter!
 2015-01-17,5,6,"Heard about it from a friend/colleague",7,NA,"Pacing was a bit on the slower side, but the training was good overall.",6,"Male/Man","Decline to state",2,1,NA,NA
 2015-01-17,7,6,"Heard about it from a friend/colleague",7,"Public Policy",NA,6,"Female/Woman","White",3,1,NA,NA
 2015-01-16,7,7,"Email from the D-Lab mailing list",7,NA,NA,7,"Male/Man","White",1,1,NA,NA
-2015-01-16,7,5,"Found it on the D-Lab website",7,"Psychology","Suggest make this training longer, time ran and lots of important stuff were not covered. 
+2015-01-16,7,5,"Found it on the D-Lab website",7,"Psychology","Suggest make this training longer, time ran and lots of important stuff were not covered.
 Kai",7,"Male/Man","Asian American",1,1,NA,NA
 2015-01-16,7,6,"Found it on the D-Lab website",7,"Neuroscience","I would suggest make this training 3 or at least 2.5 Hrs. Lots of useful content but the pace was a bit fast.
 ",7,"Male/Man","Asian American",1,1,NA,NA
@@ -477,7 +477,7 @@ Kai",7,"Male/Man","Asian American",1,1,NA,NA
 2015-01-15,7,7,"Heard about it from a friend/colleague",7,"Public Health","Too slow!",4,"Male/Man","White",1,1,NA,NA
 2015-01-15,7,7,"Heard about it from a friend/colleague",6,NA,NA,7,NA,"Decline to state",NA,NA,NA,NA
 2015-01-15,7,7,"Heard about it from a friend/colleague",7,"Public Policy",NA,6,"Male/Man","Asian American",2,1,NA,NA
-2015-01-15,6,6,"Found it on the D-Lab website",7,NA,"Chris showed us very cool things, but my windows system requires some perl to run the packages he used, so I didn't learn that part. 
+2015-01-15,6,6,"Found it on the D-Lab website",7,NA,"Chris showed us very cool things, but my windows system requires some perl to run the packages he used, so I didn't learn that part.
 
 We covered 1/4 content in the hour and 1/2 content in 30 minutes. Maybe we need extend the course time to cover everything. ",5,"Female/Woman","International",1,1,NA,NA
 2015-01-15,5,6,"Found it on the D-Lab website",6,NA,NA,5,NA,"N/A",NA,NA,NA,NA
@@ -489,7 +489,7 @@ We covered 1/4 content in the hour and 1/2 content in 30 minutes. Maybe we need 
 2015-01-15,4,5,"Email from the D-Lab mailing list",7,"Public Health",NA,6,"Female/Woman","White",1,1,NA,NA
 2015-01-15,5,3,NA,6,NA,"It is better to structure class intro as if setting up a completely new system rather than BCE if in a course of multiple units. I've seen BCE Sail multiple times",5,"Male/Man","N/A",NA,NA,NA,NA
 2015-01-15,5,6,"Email from home department",7,"Psychology",NA,5,"Female/Woman","Asian American",3,2,NA,NA
-2015-01-15,4,3,"Found it on the D-Lab website",4,NA,"I think the earlier R sessions that were more hands-on (everyone is frantically trying to type the simple code themselves, as the instructor types it as well) is _way_ more helpful than just seeing an instructor going through a pre-prepared massive list of commands. 
+2015-01-15,4,3,"Found it on the D-Lab website",4,NA,"I think the earlier R sessions that were more hands-on (everyone is frantically trying to type the simple code themselves, as the instructor types it as well) is _way_ more helpful than just seeing an instructor going through a pre-prepared massive list of commands.
 
 That is, I'd prefer to be forced to DO 10 commands myself, than to just watch an instructor run 100 commands (and have no chance of doing those 100 myself.) If I wanted the 100 version, there are a million web resources I could use myself. The advantage to sitting in a classroom is to be forced to do everything with the instructor. So the instructor should only do what they can type during the session. (Basically, Clara's classes rocked.)",3,"Male/Man","White",NA,NA,NA,NA
 2015-01-15,4,6,"Heard about it from a friend/colleague",6,NA,NA,4,NA,"N/A",NA,NA,NA,NA
@@ -519,7 +519,7 @@ That is, I'd prefer to be forced to DO 10 commands myself, than to just watch an
 2015-01-15,7,6,"Found it on the D-Lab website",7,NA,NA,7,"Male/Man","White",1,1,NA,NA
 2015-01-15,6,6,"Found it on the D-Lab website",7,"Public Policy","Interested in how the D-lab can support R skill question during the semester",5,"Male/Man","White",1,1,NA,NA
 2015-01-15,6,5,"Found it on the D-Lab website",6,"Public Policy",NA,5,"Male/Man","White",1,1,NA,NA
-2015-01-15,6,7,"Found it on the D-Lab website",7,"Psychology","It is extremely helpful. I love this workshop series, although there are only two. I wish there will be more in the series such as causal inference. 
+2015-01-15,6,7,"Found it on the D-Lab website",7,"Psychology","It is extremely helpful. I love this workshop series, although there are only two. I wish there will be more in the series such as causal inference.
 I work with quantitative data in psychology. ",7,"Female/Woman","International",1,1,NA,NA
 2015-01-15,6,7,"Heard about it from a friend/colleague",6,"Integrative Biology","Great instructor who goes through step by step process with you in Rstudio which makes it easy to follow.  She doesn't work by powerpoint only but utilizes real examples so that students can follow along and go through any problems that s/he might have.  Overall a very great experience with Clara.",6,"Female/Woman","Asian American",4,3,"Learning materials",NA
 2015-01-15,7,7,"Found it on the D-Lab website",7,NA,"Clara is patient, clear, and funny. A valuable instructor.",7,"Female/Woman","White",5,2,NA,NA
@@ -575,13 +575,13 @@ I work with quantitative data in psychology. ",7,"Female/Woman","International",
 2015-01-15,5,6,NA,6,NA,"Class seems structured as a coding intro more than python intro, perhaps split the two up",5,"Male/Man","Decline to state",4,2,NA,NA
 2015-01-15,6,7,"Found it on the D-Lab website",6,"Psychology",NA,6,"Male/Man","Asian American",1,1,NA,NA
 2015-01-15,7,7,"Found it on the D-Lab website",7,"Psychology","Great instructor!!! ",7,"Female/Woman","White",5,2,NA,NA
-2015-01-15,2,2,"Found it on the D-Lab website",NA,NA,"As you know, there were problems with the BCE. It took nearly half the class to resolve those. That was especially problematic since all participants were required to download and install it in advance as a way of avoiding precisely those kinds of problems. 
+2015-01-15,2,2,"Found it on the D-Lab website",NA,NA,"As you know, there were problems with the BCE. It took nearly half the class to resolve those. That was especially problematic since all participants were required to download and install it in advance as a way of avoiding precisely those kinds of problems.
 
-This is clearly not the instructor's fault. She did what she could given the circumstances. 
+This is clearly not the instructor's fault. She did what she could given the circumstances.
 
-It would have been helpful to get an overview of the agenda for the entire workshop at the beginning of class. For example, it would have been good to know that each session would be taught be a different instructor with a different approach and that there wasn't a sequential curriculum but disparate topics. 
+It would have been helpful to get an overview of the agenda for the entire workshop at the beginning of class. For example, it would have been good to know that each session would be taught be a different instructor with a different approach and that there wasn't a sequential curriculum but disparate topics.
 
-There also seemed to be the assumption that all of the participants attended the FUNdamentals session on Monday even though it was not required and there was no indication in the Python Intensive announcement that it was even related. 
+There also seemed to be the assumption that all of the participants attended the FUNdamentals session on Monday even though it was not required and there was no indication in the Python Intensive announcement that it was even related.
 
 The second session, on 1/14, was great. ",2,NA,"White",NA,NA,NA,NA
 2015-01-14,3,3,"Email from the D-Lab mailing list",5,NA,"The first day of the training did not cover basic taxonomy of Python (data structures & objects, types, functions & modules, etc.) Instead it jumped into a very applied example, without explaining any of the underlying code. This was not very helpful, and as a result I've decided not to attend further lectures. ",4,"Female/Woman","Asian American, White",3,2,NA,NA
@@ -640,11 +640,11 @@ The second session, on 1/14, was great. ",2,NA,"White",NA,NA,NA,NA
 2014-11-15,7,7,"Email from another mailing list",7,NA,NA,7,"Female/Woman","White",1,1,NA,NA
 2014-11-15,5,5,"Found it on the D-Lab website",7,NA,NA,4,"Male/Man","International, White",1,1,NA,NA
 2014-11-15,5,6,"Email newsletter",7,NA,"I thought the training was very thorough.  It was well paced in the beginning.  Toward the end, I felt that Garrett went a bit quickly, which didn't allow me to absorb as much information.  ",6,"Male/Man","Asian American",1,1,NA,NA
-2014-11-15,2,2,"Found it on the D-Lab website",7,"Sociology","I think this training could have benefited from a bit more structure. One of the participants in the workshop mentioned what would have been a nice way to start: with an overview of the software, its current capabilities, and how it got to that point (i.e., I thought it was interesting that it was mostly project-driven, which gives some insight into how the tool behaves). We got to that information only after about 75 minutes of sort of floundering around without much direction. 
+2014-11-15,2,2,"Found it on the D-Lab website",7,"Sociology","I think this training could have benefited from a bit more structure. One of the participants in the workshop mentioned what would have been a nice way to start: with an overview of the software, its current capabilities, and how it got to that point (i.e., I thought it was interesting that it was mostly project-driven, which gives some insight into how the tool behaves). We got to that information only after about 75 minutes of sort of floundering around without much direction.
 
 A little more explanation was required across the board. So, maybe after the potential introduction described above, there could have been a minute or two on what tasks we would be doing. Something like, ""We're going to find a mailing list and run some software that parses the headers to give us an idea of the structure of the list user community; then we'll move on to how that community might relate to other communities."" Basically, I wasn't sure (and probably am still not sure) what the software could do. So, although that might seem overly-structured, I think that a little structure is needed when people are being introduced to something completley new.
 
-This probably is specific to me, but I mention it just for something to consider. I have several  (antiquated) years experience developing database management software in Python. However,  I was a little mystified because I had done that work in vi or emacs, not the Python environment. I think just a brief intro to that environment would have helped me out. So, although that wasn't a major limiting factor and although this was an intermediate course, some assumptions that were made about what that meant (on my end and Sebastian's) that made things a little more difficult at the get-go. 
+This probably is specific to me, but I mention it just for something to consider. I have several  (antiquated) years experience developing database management software in Python. However,  I was a little mystified because I had done that work in vi or emacs, not the Python environment. I think just a brief intro to that environment would have helped me out. So, although that wasn't a major limiting factor and although this was an intermediate course, some assumptions that were made about what that meant (on my end and Sebastian's) that made things a little more difficult at the get-go.
 
 Finally, I did enjoy learning about the tool. Although it's not quite at the stage where I could apply it immediately, it did spark my imagination. So, thanks!",5,"Female/Woman","White",4,1,NA,NA
 2014-11-14,7,5,"Found it on the D-Lab website",7,NA,NA,7,"Female/Woman","White",2,1,NA,NA
@@ -733,7 +733,7 @@ Appreciated the opportunity to do a ""hands on"" exercise in class. Well facilit
 2015-05-04,7,7,"Email from the D-Lab mailing list",7,NA,NA,7,NA,"N/A",NA,NA,NA,NA
 2015-05-04,7,7,"Email from another mailing list",7,NA,NA,5,"Female/Woman","Latino/Chicano",4,1,NA,"PhD student, dissertation stage"
 2015-05-05,7,7,"Email from the D-Lab mailing list",7,NA,NA,7,"Female/Woman","White",3,1,NA,"PhD student, dissertation stage"
-2015-05-05,6,7,"Heard about it from a friend/colleague",7,NA,"Please note that the name of ""Instructor"" may not be accurate for this particular ""training."" Colleen was leading the information session (and did a fantastic job!), and Brooks was also there and very informative. 
+2015-05-05,6,7,"Heard about it from a friend/colleague",7,NA,"Please note that the name of ""Instructor"" may not be accurate for this particular ""training."" Colleen was leading the information session (and did a fantastic job!), and Brooks was also there and very informative.
 Thank you! ",7,"Female/Woman","White",1,1,NA,"Masters student"
 2015-05-06,7,6,"Heard about it from a friend/colleague",5,NA,NA,1,"Female/Woman","White",1,1,NA,"Masters student"
 2015-05-06,7,7,"Heard about it from a friend/colleague",7,NA,NA,7,"Male/Man","White",3,1,NA,"PhD student, dissertation stage"
@@ -758,7 +758,7 @@ Thank you! ",7,"Female/Woman","White",1,1,NA,"Masters student"
 2015-05-12,6,5,"Email from the D-Lab mailing list",7,NA,NA,5,NA,"n/a",1,1,NA,"n/a"
 2015-05-12,5,5,"Email from the D-Lab mailing list",5,NA,NA,5,"Female/Woman","Asian American",1,1,NA,"Visiting fellow or researcher"
 2015-05-18,6,6,"Found it on the D-Lab website",7,NA,"Hello and thanks for the training. I think the material was very useful and conveyed really well. I want to point out to a few things that I thought could be improved. The code that was provided was giving errors during the presentation which is something that can be easily fixed. Also it would be great to have some practice exercises at the end. So maybe a two day training where first day for covering the materials to be learned and the second day an hour of going through some practice exercises. Another thing is that a step by step guide to how to obtain the keys would also make the material more immediately applicable. Once again thanks for taking the time to put together this training. Best.",5,"Female/Woman","White",1,1,NA,"PhD student, dissertation stage"
-2015-05-26,6,4,NA,7,NA,"MATLAB!!! 
+2015-05-26,6,4,NA,7,NA,"MATLAB!!!
 
 For neuroscience, it's definitely needed. Would love it if D-lab would do a course for Matlab in the next few months.",5,"Female/Woman","International",4,1,NA,"Visiting fellow or researcher"
 2015-05-26,7,7,"Email from the D-Lab mailing list",7,NA,NA,6,"Male/Man","Asian American",3,1,NA,"Incoming PhD student"
@@ -772,7 +772,7 @@ For neuroscience, it's definitely needed. Would love it if D-lab would do a cour
 2015-05-26,7,7,"Email from another mailing list",7,NA,NA,7,"Male/Man","Latino/Chicano",2,2,"Learning materials","PhD student, pre-dissertation"
 2015-05-27,6,6,"Heard about it from a friend/colleague",7,NA,"very good for me. Thanks",7,"Male/Man","Chinese",4,3,"language","Visiting fellow or researcher"
 2015-05-27,7,7,"Heard about it from a friend/colleague",7,NA,"Thanks",7,"Male/Man","Chinese",4,4,"language","Visiting fellow or researcher"
-2015-05-28,7,7,"Email from the D-Lab mailing list",7,NA,"there are very few resources on campus for people learning to work with their data. we learn some skills through coursework in our first year or two, go the field/quals/etc. for one or two years and then are supposed to know how to analyze our data in the best way. 
+2015-05-28,7,7,"Email from the D-Lab mailing list",7,NA,"there are very few resources on campus for people learning to work with their data. we learn some skills through coursework in our first year or two, go the field/quals/etc. for one or two years and then are supposed to know how to analyze our data in the best way.
 students use each other and the internet for this, but it would be great to have resources/community/assistance with this stage of research (have data, don't know what to do with it...).
 thanks!",7,"Female/Woman","Asian American, White",4,1,NA,"PhD student, dissertation stage"
 2015-05-28,7,7,"Heard about it from a friend/colleague",7,NA,NA,7,"Female/Woman","n/a",1,1,NA,"Independent Research"
@@ -848,8 +848,8 @@ Great workshop as always",5,"Female/Woman","Latino/Chicano, White",4,1,NA,"PhD s
 would be interested in Latex workshops.",7,"Female/Woman","White",1,1,NA,NA
 2014-11-07,7,7,"Found it on the D-Lab website",7,"Education","Do a sequence of three or four introductory workshops on R, kind of a course where people can start from zero and getting more and more knowledge about the software if they attend all the workshops, and at the same time if there are people that already knows about R, they can join in the second or third session. My idea is similar to what you have organized in Dec. 11, but I think it can be great to do a sequence of workshops the same weekday and time in four consecutive weeks for example.",7,"Male/Man","International, White",1,1,NA,NA
 2014-11-07,7,7,"Found it on the D-Lab website",7,NA,NA,6,"Female/Woman","White",4,1,NA,NA
-2014-11-07,6,7,"Found it on the D-Lab website",7,"Public Health","Please could you send round a link to a sharable subset of the slides displayed during the session? I'd appreciate having a reference to what was discussed. 
-Also, I'm about to start using atlas.ti. Please could you host a introduction to atlas.ti session soon? 
+2014-11-07,6,7,"Found it on the D-Lab website",7,"Public Health","Please could you send round a link to a sharable subset of the slides displayed during the session? I'd appreciate having a reference to what was discussed.
+Also, I'm about to start using atlas.ti. Please could you host a introduction to atlas.ti session soon?
 Many thanks! ",5,"Female/Woman","International, White",1,1,NA,NA
 2014-11-06,6,6,"Found it on the D-Lab website",6,NA,NA,6,"Male/Man","International",2,1,NA,NA
 2014-11-06,7,7,"Heard about it from a friend/colleague",7,"Ag & Resource Econ & Pol",NA,7,"Female/Woman","Latino/Chicano",4,1,NA,NA
@@ -883,7 +883,7 @@ Many thanks! ",5,"Female/Woman","International, White",1,1,NA,NA
 
 I use a lot of complicated multi-level data.  I have organizational level survey data with some qualitative components.  I'm also working on a project that combines individual, organizational level, and market level data (hence the need for HLM).  I often combine qualitative and quantitative data in the same project.  My data are messy - usually I collect them myself rather than relying on government databases -- and involve a lot of missing data.  Techniques for imputing missing data would be another area where a class or training would be useful.  I have a project where I'm combining organizational level data with Census data and using GIS approaches to look at access to justice across the United States - figuring out how to code street addresses and combing information across these sources was a nightmare.
 
-My technical challenges are both logistical and methodological.  Logistically, I spend too much time tracking down software, software licenses, and keeping them current.  Also, I use so  many different programs that the licenses tend to drain my research account.  If the university had site licenses and a transparent way of getting these programs to folks it would be a tremendous help to  myself and my graduate students.  I also have technical challenges managing collaboration with folks at other universities in a way that keeps data involving human subjects secure.  
+My technical challenges are both logistical and methodological.  Logistically, I spend too much time tracking down software, software licenses, and keeping them current.  Also, I use so  many different programs that the licenses tend to drain my research account.  If the university had site licenses and a transparent way of getting these programs to folks it would be a tremendous help to  myself and my graduate students.  I also have technical challenges managing collaboration with folks at other universities in a way that keeps data involving human subjects secure.
 
 The other challenges have to do with modeling and data management.  I often find I can get 80% of the way there on paper, but would benefit from some targeted consulting/instruction to finish up a project.  Finding the time and expertise to do that is a problem.  If there were someone to call for assistance when I reach that point it would be tremendously helpful.  Also, often myself and my graduate students will have some similar research challenges using GIS or NVIVO, and we would really benefit from a two hour class with some intensive consulting on our particular projects.  It would be great if it were possible to set up something like that where we could work on the actual projects we are struggling with.",5,"Female/Woman","White",2,1,NA,NA
 2014-10-30,2,7,"Email from the D-Lab mailing list",7,"History","The only real problem was that I was a Mac User and thus couldn't follow the tutorial.  I took notes on the instruction for part of the course, but it quickly became too detailed to be effective.  I'm sure with the right tools this course would have been great!  Could the dlab possibly provide or lend PCs to Mac Users for PC-specific software?",3,"Female/Woman","White",1,1,NA,NA
@@ -943,9 +943,9 @@ The other challenges have to do with modeling and data management.  I often find
 2014-10-15,2,3,"micronet",2,NA,"Either I'm slow or Quinn was fast or the class wasn't advertised clearly beacause I got lost fast.",3,"Male/Man","White",2,NA,NA,NA
 2014-10-15,7,7,"Email from another mailing list",6,NA,NA,6,"Male/Man","White",1,1,NA,NA
 2014-10-15,7,7,"Found it on the D-Lab website",7,NA,"Thank you very much for a thorough and very helpful introduction to using Drupal. I've got a lot more to learn and appreciate the great foundation.",7,"Female/Woman","Asian American",1,1,NA,NA
-2014-10-15,1,1,NA,NA,NA,"testing 
+2014-10-15,1,1,NA,NA,NA,"testing
 This is Susan Grand",1,NA,"testing",1,NA,"testing",NA
-2014-10-15,7,6,"Linked from another website",7,NA,"This is my first attendance to D-Lab events. I like the small and interactive environment, and learned something new. 
+2014-10-15,7,6,"Linked from another website",7,NA,"This is my first attendance to D-Lab events. I like the small and interactive environment, and learned something new.
 The diversity of the audience makes it difficult for the curriculum to cater to everyone.",7,"Male/Man","Asian American",1,1,NA,NA
 2014-10-15,4,4,"Found it on the D-Lab website",7,NA,NA,6,"Female/Woman","White",5,1,NA,NA
 2014-10-15,4,3,"Email from the D-Lab mailing list",7,NA,"The instructor wasn't really very prepared. It's an interesting new tool and I may end up using it - particularly for web publishing. I did learn the basics and the online materials look pretty good. It's in beta so I'll cut him a break.",6,"Male/Man","White",1,1,NA,NA
@@ -1112,9 +1112,9 @@ But it would have been helpful to get some practical skills in a basic program s
 2014-09-22,5,5,"Heard about it from a friend/colleague",7,NA,"I feel the latter part of the slides are more relevant to what I want to learn. The first part of the class is interesting, but has less application for me at the moment. ",4,"Female/Woman","Asian American",3,3,"Learning materials",NA
 2014-09-22,4,5,"Email from the D-Lab mailing list",5,NA,NA,5,"Female/Woman","South Asian",4,2,"Instructors",NA
 2014-09-22,6,7,"Email from another mailing list",6,NA,NA,7,"Female/Woman","Latino/Chicano",5,2,"D-Lab students",NA
-2014-09-22,3,7,"Email from the D-Lab mailing list",6,NA,"I was very interested in this event because of some of what I do here at UCB. Terry is a great presenter, but the ""advertised content"" really didn't start until the event was more than half over. I think much of what was covered in the first part is already known by most of the folks who attended.  If in the future some of this content was left out, then maybe the problem of going overtime would go away. I think this would be a great pgm for a future CTL dialog (http://teaching.berkeley.edu/dialogues-colloquium-series-teaching) but the folks who attend those would be extremely well-versed in everything covered in the first part of Terry's gig. 
+2014-09-22,3,7,"Email from the D-Lab mailing list",6,NA,"I was very interested in this event because of some of what I do here at UCB. Terry is a great presenter, but the ""advertised content"" really didn't start until the event was more than half over. I think much of what was covered in the first part is already known by most of the folks who attended.  If in the future some of this content was left out, then maybe the problem of going overtime would go away. I think this would be a great pgm for a future CTL dialog (http://teaching.berkeley.edu/dialogues-colloquium-series-teaching) but the folks who attend those would be extremely well-versed in everything covered in the first part of Terry's gig.
 Thank you for putting this event on!",5,"Male/Man","White",1,1,NA,NA
-2014-09-19,6,7,"Email from another mailing list",7,NA,"This form does not seem to fit with the class today.  Also, the check all that apply only let me select one option in the previous question.  
+2014-09-19,6,7,"Email from another mailing list",7,NA,"This form does not seem to fit with the class today.  Also, the check all that apply only let me select one option in the previous question.
 Instructor: Terry
 Class: Inclusive STEM classroom techniques",6,"Female/Woman","Hawaiian/Pacific Islander",5,2,"Instructors",NA
 2014-09-16,5,6,"Email from another mailing list",6,"Public Health",NA,6,"Male/Man","African American/Black",5,2,NA,NA
@@ -1167,5 +1167,5 @@ I understand that Dav wanted us to learn in a ""professional"" environment using
 2014-08-19,7,7,"Email from the D-Lab mailing list",7,"Public Health","More R bootcamp trainings please! They fill up so fast!",7,"Female/Woman","Arab",4,1,NA,NA
 2014-08-19,7,7,"Found it on the D-Lab website",7,"Economics",NA,7,"Female/Woman","White",2,1,NA,NA
 2014-08-19,4,3,"Email from another mailing list",6,"History","I understand that teaching programming is going to be a difficult proposition no matter how one goes about it.  I also understand the utility of using BCE.  The constant functionality issues associated with BCE, however, really slowed the workshop down.  It might make sense to have people come in 30 minutes prior to the course to resolve download and install issues so that the course itself can focus on programming.  ",4,"Male/Man","White",1,1,NA,NA
-2014-08-19,5,7,"Heard about it from a friend/colleague",7,"Energy & Resources Group","It's hard sometimes to follow what the instructor is doing, because there are 30 people in the class so the instructor can't stop each time one of us has an issue with their laptop. 
+2014-08-19,5,7,"Heard about it from a friend/colleague",7,"Energy & Resources Group","It's hard sometimes to follow what the instructor is doing, because there are 30 people in the class so the instructor can't stop each time one of us has an issue with their laptop.
 It would be great to have access to tutorials for example pdfs with screenshots so that we can prepare before the class or work on them after class to make sure we understood well.",5,"Female/Woman","International",1,1,NA,NA
