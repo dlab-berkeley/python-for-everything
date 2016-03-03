@@ -1,0 +1,10 @@
+#!/bin/bash
+# First, make sure you specify all of the paths that you might need to run
+# your task. If you aren't sure, copy the entire $PATH variable
+
+PATH=/home/dillon/.conda/envs/py27/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Then, specify when you want the task to occur; the user account to run it;
+# and the job
+
+@hourly dillon cd ~/scripts; python simple.py

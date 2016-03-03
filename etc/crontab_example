@@ -1,0 +1,6 @@
+# In a user's crontab, jobs run under that user
+# Time is specified as <min> <hour> <day> <month> <wday>
+# To specify any time, use `*`
+# For unknown reasons, cronjobs fail unless the tab ends with a newline
+
+00 08 * * 1 echo "It is 8am on Monday" >> /var/dumblog
