@@ -13,14 +13,14 @@ This repository holds all of the necessary materials, code, and data for D-Lab's
 You can download the contents of this repository with:
 
 ```
-git clone
+git clone https://github.com/dlab-berkeley/python-for-everything.git
 ```
 
 or, by clicking the "Download Zip" button and then extracting the `.zip` file.
 
 The instructor of this workshop series will lead you through the activities for each day.
 
-For more Python resources, visit [python.berkeley.edu](python.berkeley.edu).
+For more Python resources, visit [python.berkeley.edu](http://python.berkeley.edu/resources/).
 
 ## If you are a D-Lab instructor
 
