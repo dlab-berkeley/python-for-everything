@@ -21,4 +21,4 @@ def test_stemmer():
         assert unstemmed_word not in d
 
 def test_stop_words():
-    assert B.stop_list = []
+    assert type(B.stop_list) is list
