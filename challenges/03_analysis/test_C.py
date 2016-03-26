@@ -1,7 +1,7 @@
 #!/bin/env python
 
 import os
-import pandas as pdb
+import pandas as pd
 import pytest
 
 import C_tables as C
@@ -11,7 +11,7 @@ def test_import():
     assert C.person_data.shape == (100,3)
 
 def test_merge():
-    assert C.person_data.shape == (100,3)
+    assert C.all_data.shape == (103,6)
 
 def test_new():
     assert os.path.isfile('../../data/height_above_sea.csv')
