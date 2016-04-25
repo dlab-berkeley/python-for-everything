@@ -6,6 +6,10 @@ title : Publicity and descriptions for Python Instruction
 
 The social scientist's complete introduction to Python - starting soon! [insert link here](https://youtu.be/dQw4w9WgXcQ)
 
+# Information for calendar
+
+The workshop duration is 3hrs per day. Many students like to hang around for a bit after the classes end, so please keep the room reserved for half an hour after the end of the workshop.
+
 # Descriptions for website
 
 ## Header
