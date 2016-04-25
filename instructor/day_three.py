@@ -623,7 +623,7 @@ long_table.pivot(columns='variable')
 
 # In[65]:
 
-long_table.pivot(columns='variable', values='value')
+long_table.pivot(index='name', columns='variable', values='value')
 
 
 # #### Challenge time!
@@ -683,8 +683,8 @@ data = pd.read_csv('../data/03_feedback.csv')
 
 # In[72]:
 
-i = data['inside.barriers'].dropna()
-o = data['outside.barriers'].dropna()
+i = data['inside_barriers'].dropna()
+o = data['outside_barriers'].dropna()
 stats.ttest_ind(i, o)
 
 
@@ -694,9 +694,9 @@ stats.ttest_ind(i, o)
 
 # In[73]:
 
-m = data[data.gender == "Male/Man"]['outside.barriers'].dropna()
-f = data[data.gender == "Female/Woman"]['outside.barriers'].dropna()
-q = data[data.gender == "Genderqueer/Gender non-conforming"]['outside.barriers'].dropna()
+m = data[data.gender == "Male/Man"]['outside_barriers'].dropna()
+f = data[data.gender == "Female/Woman"]['outside_barriers'].dropna()
+q = data[data.gender == "Genderqueer/Gender non-conforming"]['outside_barriers'].dropna()
 stats.f_oneway(m, f, q)
 
 
@@ -708,8 +708,8 @@ stats.f_oneway(m, f, q)
 
 # In[74]:
 
-intermediate = data.dropna(subset=['inside.barriers', 'outside.barriers'])
-stats.pearsonr(intermediate['outside.barriers'], intermediate['inside.barriers'])
+intermediate = data.dropna(subset=['inside_barriers', 'outside_barriers'])
+stats.pearsonr(intermediate['outside_barriers'], intermediate['inside_barriers'])
 
 
 # At this point, we're going to pivot to using `statsmodels`
