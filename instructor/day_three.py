@@ -1,431 +1,336 @@
 
 # coding: utf-8
 
-# # Text Data
+# # Creating data with web APIs
 # 
-# ## Pre-introduction
+# Most people who think they want to do web scraping actually want to pull data down from site-supplied APIs. Using an API is better in almost every way, and really the only reason to scrape data is if:
 # 
-# We'll be spending a lot of time today manipulating text. Make sure you remember how to split, join, and search strings.
+# 1. The website was constructed in the 90s and does not have an API; or,
+# 2. You are doing something illegal
+# 
+# If [LiveJournal has an API](http://dev.livejournal.com/), the website you are interested in probably does too.
+# 
+# ## What is an API?
+# 
+# **API** is shorthand for **A**pplication **P**rogramming **I**nterface, which is in turn computer-ese for a middleman.
+# 
+# Think about it this way. You have a bunch of things on your computer that you want other people to be able to look at. Some of them are static documents, some of them call programs in real time, and some of them are programs themselves.
+# 
+# #### Solution 1
+# 
+# You publish login credentials on the internet, and let anyone log into your computer
+# 
+# Problems:
+# 
+# 1. People will need to know how each document and program works to be able to access their data
+# 
+# 2. You don't want the world looking at your browser history
+# 
+# #### Solution 2
+# 
+# You paste everything into HTML and publish it on the internet
+# 
+# Problems:
+# 
+# 1. This can be information overload
+# 
+# 2. Making things dynamic can be tricky
+# 
+# #### Solution 3
+# 
+# You create a set of methods to act as an intermediary between the people you want to help and the things you want them to have access to.
+# 
+# Why this is the best solution:
+# 
+# 1. People only access what you want them to have, in the way that you want them to have it
+# 
+# 2. People use one language to get the things they want
+# 
+# Why this is still not Panglossian:
+# 
+# 1. You will have to explain to people how to use your middleman
+# 
 
-# ## Introduction
+# ## Twitter's API
 # 
-# We've spent a lot of time in python dealing with text data, and that's because text data is everywhere. It is the primary form of communication between persons and persons, persons and computers, and computers and computers. The kind of inferential methods that we apply to text data, however, are different from those applied to tabular data. 
+# Twitter has an API - mostly written for third-party apps - that is comparatively straightforward and gives you access to _nearly_ all of the information that Twitter has about its users, including:
 # 
-# This is partly because documents are typically specified in a way that expresses both structure and content using text (i.e. the document object model).
+# 1. User histories
 # 
-# Largely, however, it's because text is difficult to turn into numbers in a way that preserves the information in the document. Today, we'll talk about dominant language model in NLP and the basics of how to implement it in Python.
+# 2. User (and tweet) location
 # 
-# ### The term-document model
+# 3. User language
 # 
-# This is also sometimes referred to as "bag-of-words" by those who don't think very highly of it. The term document model looks at language as individual communicative efforts that contain one or more tokens. The kind and number of the tokens in a document tells you something about what is attempting to be communicated, and the order of those tokens is ignored.
+# 4. Tweet popularity
 # 
-# To start with, let's load a document.
+# 5. Tweet spread
+# 
+# 6. Conversation chains
+# 
+# Also, Twitter returns data to you in json, or **J**ava **S**cript **O**bject **N**otation. This is a very common format for passing data around http connections for browsers and servers, so many APIs return it as a datatype as well (instead of using something like xml or plain text).
+# 
+# Luckily, json converts into native Python data structures. Specifically, every json object you get from Twitter will be a combination of nested `dicts` and `lists`, which you learned about yesterday. This makes Twitter a lot easier to manipulate in Python than html objects, for example.
+# 
+# Here's what a tweet looks like:
 
 # In[1]:
 
-import nltk
-#nltk.download('webtext')
-document = nltk.corpus.webtext.open('grail.txt').read()
+import json
+
+with open('../data/02_tweet.json','r') as f:
+    a_tweet = json.loads(f.read())
 
 
-# Let's see what's in this document
+# We can take a quick look at the structure by pretty printing it:
 
 # In[2]:
 
-len(document.split('\n'))
+from pprint import pprint
 
+pprint(a_tweet)
+
+
+# #### Time for a challenge!
+# 
+# Let's see how much you remember about lists and dicts from yesterday. Go into the challenges directory and try your hand at `02_scraping/C_json.py`.
+
+# ## Authentication
+# 
+# Twitter controls access to their servers via a process of authentication and authorization. Authentication is how you let Twitter know who you are, in a way that is very hard to fake. Authorization is how the account owner (which will usually be yourself unless you are writing a Twitter app) controls what you are allowed to do in Twitter using their account. In Twitter, different levels of authorization require different levels of authentication. 
+# 
+# Because we want to be able to interact with everything, we'll need the highest level of authorization and the strictest level of authentication. In Twitter, this means that we need two sets of ID's (called keys or tokens) and passwords (called secrets):
+# 
+# * consumer_key
+# * consumer_secret
+# * access_token_key
+# * access_token_secret
+# 
+# We'll provide some for you to use, but if you want to get your own you need to create an account on Twitter with a verified phone number. Then, while signed in to your Twitter account, go to: https://apps.twitter.com/. Follow the prompts to generate your keys and access tokens. Note that getting the second ID/password pair requires that you manually set the authorization level of your app.
+# 
+# We've stored our credentials in a separate file, which is smart. However, we have uploaded it to Github so that you have them too, which is not smart. 
+# 
+# **You should NEVER NEVER NEVER do this in real life.**
+# 
+# We've stored it in YAML format, because it is more human-readible than JSON is. However, once it's inside Python, these data structures behave the same way.
 
 # In[3]:
 
-document.split('\n')[0:10]
+import yaml
+
+with open('../etc/creds.yml', 'r') as f:
+    creds = yaml.load(f)
 
 
-# It looks like we've gotten ourselves a bit of the script from Monty Python and the Holy Grail. Note that when we are looking at the text, part of the structure of the document is written in tokens. For example, stage directions have been placed in brackets, and the names of the person speaking are in all caps.
-# 
-# ## Regular expressions
-# 
-# If we wanted to read out all of the stage directions for analysis, or just King Arthur's lines, doing so in base python string processing will be very difficult. Instead, we are going to use regular expressions. Regular expressions are a method for string manipulation that match patterns instead of bytes.
+# We're going to load these credentials into a requests module specifically designed for handling the flavor of authentication management that Twitter uses.
 
 # In[4]:
 
-import re
-snippet = "I fart in your general direction! Your mother was a hamster, and your father smelt of elderberries!"
-re.search(r'mother', snippet)
+from requests_oauthlib import OAuth1Session
+
+twitter = OAuth1Session(**creds)
 
 
-# Just like with `str.find`, we can search for plain text. But `re` also gives us the option for searching for patterns of bytes - like only alphabetic characters.
+# That `**` syntax we just used is called a "double splat" and is a python convenience function for converting the key-value pairs of a dictionary into keyword-argument pairs to pass to a function.
+
+# ## Accessing the API
+
+# Access to Twitter's API is organized through URLs called "endpoints". An endpoint is the location at which you can submit a request for Twitter to do something for you.
+# 
+# For example, the "endpoint" to search for specific kinds of tweets is at:
+# 
+# ```
+# https://api.twitter.com/1.1/search/tweets.json
+# ```
+# 
+# whereas posting new tweets is at:
+# 
+# ```
+# https://api.twitter.com/1.1/statuses/update.json
+# ```
+# 
+# For more information on the REST APIs, end points, and terms, check out: https://dev.twitter.com/rest/public. For the Streaming APIs: https://dev.twitter.com/streaming/overview.
+# 
+# All APIs on Twitter are "rate-limited" - this means that you are only allowed to ask a set number of questions per unit time (to keep their servers from being overloaded). This rate varies by endpoint and authorization, so be sure to check their developer site for the action you are trying to take.
+# 
+# For example, at the lowest level of authorization (Twitter calls this `application only`), you are allowed to make 450 search requests per 15 minute window, or about one every two seconds. At the highest level of authorization (Twitter calls this `user`) you can submit 180 requests every 15 minutes, or only about once every five seconds.
+# 
+# > side note - Google search is the worst rate-limiting I've ever seen, with an allowance of one hundred requests per day, or about once every *nine hundred seconds*
+# 
+# Let's try a couple of simple API queries. We're going to specify query parameters with `param`.
 
 # In[5]:
 
-re.search(r'[a-z]', snippet)
+search = "https://api.twitter.com/1.1/search/tweets.json"
+
+r = twitter.get(search, params={'q' : 'technology'})
 
 
-# In this case, we've told re to search for the first sequence of bytes that is only composed of lowercase letters between `a` and `z`. We could get the letters at the end of each sentence by including a bang at the end of the pattern.
+# This has returned an http response object, which contains data like whether or not the request succeeded:
 
 # In[6]:
 
-re.search(r'[a-z]!', snippet)
+r.ok
 
 
-# If we wanted to pull out just the stage directions from the screenplay, we might try a pattern like this:
+# You can also get the http response code, and the reason why Twitter sent you that code (these are all super important for controlling the flow of your program).
 
 # In[7]:
 
-re.findall(r'[a-zA-Z]', document)[0:10]
+r.status_code, r.reason
 
 
-# So that's obviously no good. There are two things happening here:
-# 
-# 1. `[` and `]` do not mean 'bracket'; they are special characters which mean 'any thing of this class'
-# 2. we've only matched one letter each
-# 
-# A better regular expression, then, would wrap this in escaped brackets, and include a command saying more than one letter.
-# 
-# Re is flexible about how you specify numbers - you can match none, some, a range, or all repetitions of a sequence or character class.
-# 
-# character | meaning
-# ----------|--------
-# `{x}`     | exactly x repetitions
-# `{x,y}`   | between x and y repetitions
-# `?`       | 0 or 1 repetition
-# `*`       | 0 or many repetitions
-# `+`       | 1 or many repetitions
+# The data that we asked Twitter to send us in r.content
 
 # In[8]:
 
-re.findall(r'\[[a-zA-Z]+\]', document)[0:10]
+r.content
 
 
-# This is better, but it's missing that `[clop clop clop]` we saw above. This is because we told the regex engine to match any alphabetic character, but we did not specify whitespaces, commas, etc. to match these, we'll use the dot operator, which will match anything expect a newline.
-# 
-# Part of the power of regular expressions are their special characters. Common ones that you'll see are:
-# 
-# character | meaning
-# ----------|--------
-# `.`       | match anything except a newline
-# `^`       | match the start of a line
-# `$`       | match the end of a line
-# `\s`      | matches any whitespace or newline
-# 
-# Finally, we need to fix this `+` character. It is a 'greedy' operator, which means it will match as much of the string as possible. To see why this is a problem, try:
+# But that's not helpful. We can extract it in python's representation of json with the `json` method:
 
 # In[9]:
 
-snippet = 'This is [cough cough] and example of a [really] greedy operator'
-re.findall(r'\[.+\]', snippet)
+r.json()
 
 
-# Since the operator is greedy, it is matching everything inbetween the first open and the last close bracket. To make `+` consume the least possible amount of string, we'll add a `?`.
+# This has some helpful metadata about our request, like a url where we can get the next batch of results from Twitter for the same query:
 
 # In[10]:
 
-p = re.compile(r'\[.+?\]')
-re.findall(p, document)[0:10]
+data = r.json()
+data['search_metadata']
 
 
-# What if we wanted to grab all of Arthur's speech? This one is a little trickier, since:
-# 
-# 1. It is not conveniently bracketed; and,
-# 2. We want to match on ARTHUR, but not to capture it
-# 
-# If we wanted to do this using base string manipulation, we would need to do something like:
-# 
-# ```
-# split the document into lines
-# create a new list of just lines that start with ARTHUR
-# create a newer list with ARTHUR removed from the front of each element
-# ```
-# 
-# Regex gives us a way of doing this in one line, by using something called groups. Groups are pieces of a pattern that can be ignored, negated, or given names for later retrieval.
-# 
-# character | meaning
-# ----------|--------
-# `(x)`     | match x
-# `(?:x)`   | match x but don't capture it
-# `(?P<x>)` | match something and give it name x
-# `(?=x)`   | match only if string is followed by x
-# `(?!x)`   | match only if string is not followed by x
+# The tweets that we want are under the key "statuses"
 
 # In[11]:
 
-p = re.compile(r'(?:ARTHUR: )(.+)')
-re.findall(p, document)[0:10]
+statuses = data['statuses']
+statuses[0]
 
 
-# Because we are using `findall`, the regex engine is capturing and returning the normal groups, but not the non-capturing group. For complicated, multi-piece regular expressions, you may need to pull groups out separately. You can do this with names.
+# This is one tweet.
+# 
+# > Depending on which tweet this is, you may or may not see that Twitter automatically pulls out links and mentions and gives you their index location in the raw tweet string
+# 
+# Twitter gives you a whole lot of information about their users, including geographical coordinates, the device they are tweeting from, and links to their photographs.
+
+# Twitter supports what it calls query operators, which modify the search behavior. For example, if you want to search for tweets where a particular user is mentioned, include the at-sign, `@`, followed by the username. To search for tweets sent to a particular user, use `to:username`. For tweets from a particular user, `from:username`. For hashtags, use `#hashtag`.
+# 
+# For a complete set of options: https://dev.twitter.com/rest/public/search.
+# 
+# Let's try a more complicated search:
 
 # In[12]:
 
-p = re.compile(r'(?P<name>[A-Z ]+)(?::)(?P<line>.+)')
-match = re.search(p, document)
-match
+r = twitter.get(search, params={
+        'q' : 'happy',
+        'geocode' : '37.8734855,-122.2597169,10mi'
+    })
+r.ok
 
 
 # In[13]:
 
-match.group('name'), match.group('line')
+statuses = r.json()['statuses']
+statuses[0]
 
 
-# #### Now let's try a small challenge!
-# 
-# To check that you've understood something about regular expressions, we're going to have you do a small test challenge. Partner up with the person next to you - we're going to do this as a pair coding exercise - and choose which computer you are going to use.
-# 
-# Then, navigate to `challenges/03_analysis/` and read through challenge A. When you think you've completed it successfully, run `py.test test_A.py` .
-
-# ## Tokenizing
-# 
-# Let's grab Arthur's speech from above, and see what we can learn about Arthur from it.
+# If we want to store this data somewhere, we can output it as json using the json library from above. However, if you're doing a lot of these, you'll probaby want to use a database to handle everything.
 
 # In[14]:
 
-p = re.compile(r'(?:ARTHUR: )(.+)')
-arthur = ' '.join(re.findall(p, document))
-arthur[0:100]
+with open('my_tweets.json', 'w') as f:
+    json.dump(statuses, f)
 
 
-# In our model for natural language, we're interested in words. The document is currently a continuous string of bytes, which isn't ideal. You might be tempted to separate this into words using your newfound regex knowledge:
+# To post tweets, we need to use a different endpoint:
 
 # In[15]:
 
-p = re.compile(r'\w+', flags=re.I)
-re.findall(p, arthur)[0:10]
+post = "https://api.twitter.com/1.1/statuses/update.json"
 
 
-# But this is problematic for languages that make extensive use of punctuation. For example, see what happens with:
+# And now we can pass a new tweet (remember, Twitter calls these 'statuses') as a parameter to our post request.
 
 # In[16]:
 
-re.findall(p, "It isn't Dav's cheesecake that I'm worried about")
+r = twitter.post(post, params={
+        'status' : "I stole Juan's Twitter credentials"
+    })
+r.ok
 
 
-# The practice of pulling apart a continuous string into units is called "tokenizing", and it creates "tokens". NLTK, the canonical library for NLP in Python, has a couple of implementations for tokenizing a string into words.
+# Other (optional) parameters include things like location, and replies.
+
+# ## Scheduling
+
+# The real beauty of bots is that they are designed to work without interaction or oversight. Imagine a situation where you want to automatically retweet everything coming out of the D-Lab's twitter account, "@DLabAtBerkeley". You could:
+# 
+# 1. spend the rest of your life glued to D-Lab's twitter page and hitting refresh; or,
+# 2. write a function
+# 
+# We're going to import a module called `time` that will pause our code, so that we don't hit Twitter's rate limit
 
 # In[17]:
 
-from nltk import word_tokenize
-word_tokenize("It isn't Dav's cheesecake that I'm worried about")
+import time
+
+def retweet():
+    r = twitter.get(search, {'q':'DLabAtBerkeley'})
+    if r.ok:
+        statuses = r.json()['statuses']
+        for update in statuses:
+            username = item['user']['screen_name']
+            parameters = {'status':'HOORAY! @' + username}
+            r = twitter.post(post, parameters)
+            print(r.status_code, r.reason)
+            time.sleep(5)
 
 
-# The distinction here is subtle, but look at what happened to "isn't". It's been separated into "IS" and "N'T", which is more in keeping with the way contractions work in English.
+# But you are a human that needs to eat, sleep, and be social with other humans. Luckily, Linux systems have a time-based daemon called `cron` that will run scripts like this *for you*. 
+# 
+# > People on windows and macs will not be able to run this. That's okay.
+# 
+# The way that `cron` works is it reads in files where each line has a time followed by a job (these are called cronjobs). You can edit your crontab by typing `crontab -e` into a terminal.
+# 
+# They looks like this:
 
 # In[18]:
 
-tokens = word_tokenize(arthur)
-tokens[0:10]
+with open('../etc/crontab_example', 'r') as f:
+    print(f.read())
 
 
-# At this point, we can start asking questions like what are the most common words, and what words tend to occur together.
+# This is telling `cron` to print that statement to a file called "dumblog" at 8am every Monday.
+# 
+# It's generally frowned upon to enter jobs through crontabs because they are hard to modify without breaking them. The better solution is to put your timed command into a file and copy the file into `/etc/cron.d/`. These files look like this:
 
 # In[19]:
 
-len(tokens), len(set(tokens))
+with open('../etc/crond_example', 'r') as f:
+    print(f.read())
 
 
-# So we can see right away that Arthur is using the same words a whole bunch - on average, each unique word is used four times. This is typical of natural language. 
+# At this point, you might be a little upset that you can't do this on your laptop, but the truth is you don't really want to run daemons and cronjobs on your laptop, which goes to sleep and runs out of batteries. This is what servers are for (like AWS).
+
+# ## Now it is time for you to make your own twitter bot!
 # 
-# > Not necessarily the value, but that the number of unique words in any corpus increases much more slowly than the total number of words.
+# To get you started, we've put a template in the `scripts` folder. Try it out, but be generous with your `time.sleep()` calls as the whole class is sharing this account.
 # 
-# > A corpus with 100M tokens, for example, probably only has 100,000 unique tokens in it.
+# If you have tried to run this, or some of the earlier code in this notebook, you have probably encountered some of Twitter's error codes. Here are the most common, and why you are triggering them.
 # 
-# For more complicated metrics, it's easier to use NLTK's classes and methods.
-
-# In[20]:
-
-from nltk import collocations
-fd = collocations.FreqDist(tokens)
-fd.most_common()[:10]
-
-
-# In[21]:
-
-measures = collocations.BigramAssocMeasures()
-c = collocations.BigramCollocationFinder.from_words(tokens)
-c.nbest(measures.pmi, 10)
-
-
-# In[22]:
-
-c.nbest(measures.likelihood_ratio, 10)
-
-
-# We see here that the collocation finder is pulling out some things that have face validity. When Arthur is talking about peasants, he calls them "bloody" more often than not. However, collocations like "Brother Maynard" and "BLACK KNIGHT" are less informative to us, because we know that they are proper names.
+# 1. `400 = bad request` - This means the API (middleman) doesn't like how you formatted your request. Check the API documentation to make sure you are doing things correctly.
 # 
-# If you were interested in collocations in particular, what step do you think you would have to take during the tokenizing process?
-
-# ## Stemming
+# 2. `401 = unauthorized` - This either means you entered your auth codes incorrectly, or those auth codes don't have permission to do what you're trying to do. It takes Twitter a while to assign posting rights to your auth tokens after you've given them your phone number. If you have just done this, wait five minutes, then try again.
 # 
-# This has gotten us as far identical tokens, but in language processing, it is often the case that the specific form of the word is not as important as the idea to which it refers. For example, if you are trying to identify the topic of a document, counting 'running', 'runs', 'ran', and 'run' as four separate words is not useful. Reducing words to their stems is a process called stemming.
+# 3. `403 = forbidden` - Twitter won't let you post what you are trying to post, most likely because you are trying to post the same tweet twice in a row within a few minutes of each other. Try changing your status update. If that doesn't fix it, then you are either:
 # 
-# A popular stemming implementation is the Snowball Stemmer, which is based on the Porter Stemmer. It's algorithm looks at word forms and does things like drop final 's's, 'ed's, and 'ing's.
+#     A. Hitting Twitter's daily posting limit. They don't say what this is.
+#         
+#     B. Trying to follow too many people, rapidly following and unfollowing the same person, or are otherwise making Twitter think you are a spambot
 # 
-# Just like the tokenizers, we first have to create a stemmer object with the language we are using.
-
-# In[23]:
-
-snowball = nltk.SnowballStemmer('english')
-
-
-# Now, we can try stemming some words
-
-# In[24]:
-
-snowball.stem('running')
-
-
-# In[25]:
-
-snowball.stem('eats')
-
-
-# In[26]:
-
-snowball.stem('embarassed')
-
-
-# Snowball is a very fast algorithm, but it has a lot of edge cases. In some cases, words with the same stem are reduced to two different stems.
-
-# In[27]:
-
-snowball.stem('cylinder'), snowball.stem('cylindrical')
-
-
-# In other cases, two different words are reduced to the same stem.
-# 
-# > This is sometimes referred to as a 'collision'
-
-# In[28]:
-
-snowball.stem('vacation'), snowball.stem('vacate')
-
-
-# In[29]:
-
-snowball.stem('organization'), snowball.stem('organ')
-
-
-# In[30]:
-
-snowball.stem('iron'), snowball.stem('ironic')
-
-
-# In[31]:
-
-snowball.stem('vertical'), snowball.stem('vertices')
-
-
-# A more accurate approach is to use an English word bank like WordNet to call dictionary lookups on word forms, in a process called lemmatization.
-
-# In[32]:
-
-# nltk.download('wordnet')
-wordnet = nltk.WordNetLemmatizer()
-
-
-# In[33]:
-
-wordnet.lemmatize('iron'), wordnet.lemmatize('ironic')
-
-
-# In[34]:
-
-wordnet.lemmatize('vacation'), wordnet.lemmatize('vacate')
-
-
-# Nothing comes for free, and you've probably noticed already that the lemmatizer is slower. We can see how much slower with one of IPYthon's `magic functions`.
-
-# In[35]:
-
-get_ipython().magic("timeit wordnet.lemmatize('table')")
-
-
-# In[36]:
-
-4.45 * 5.12
-
-
-# In[37]:
-
-get_ipython().magic("timeit snowball.stem('table')")
-
-
-# #### Time for another small challenge!
-# 
-# Switch computers for this one, so that you are using your partner's computer, and try your hand at challenge B!
-
-# ## Sentiment
-# 
-# Frequently, we are interested in text to learn something about the person who is speaking. One of these things we've talked about already - linguistic diversity. A similar metric was used a couple of years ago to settle the question of who has the [largest vocabulary in Hip Hop](http://poly-graph.co/vocabulary.html).
-# 
-# > Unsurprisingly, top spots go to Canibus, Aesop Rock, and the Wu Tang Clan. E-40 is also in the top 20, but mostly because he makes up a lot of words; as are OutKast, who print their lyrics with words slurred in the actual typography
-# 
-# Another thing we can learn is about how the speaker is feeling, with a process called sentiment analysis. Before we start, be forewarned that this is not a robust method by any stretch of the imagination. Sentiment classifiers are often trained on product reviews, which limits their ecological validity.
-# 
-# We're going to use TextBlob's built-in sentiment classifier, because it is super easy.
-
-# In[38]:
-
-from textblob import TextBlob
-
-
-# In[39]:
-
-blob = TextBlob(arthur)
-
-
-# In[40]:
-
-for sentence in blob.sentences[10:25]:
-    print(sentence.sentiment.polarity, sentence)
-
-
-# ## Semantic distance
-# 
-# Another common NLP task is to look for semantic distance between documents. This is used by search engines like Google (along with other things like PageRank) to decide which websites to show you when you search for things like 'bike' versus 'motorcycle'.
-# 
-# It is also used to cluster documents into topics, in a process called topic modeling. The math behind this is beyond the scope of this course, but the basic strategy is to represent each document as a one-dimensional array, where the indices correspond to integer ids of tokens in the document. Then, some measure of semantic similarity, like the cosine of the angle between unitized versions of the document vectors, is calculated.
-# 
-# Luckily for us there is another python library that takes care of the heavy lifting for us.
-
-# In[41]:
-
-from gensim import corpora, models, similarities
-
-
-# We already have a document for Arthur, but let's grab the text from someone else to compare it with.
-
-# In[42]:
-
-p = re.compile(r'(?:GALAHAD: )(.+)')
-galahad = ' '.join(re.findall(p, document))
-arthur_tokens = tokens
-galahad_tokens = word_tokenize(galahad)
-
-
-# Now, we use gensim to create vectors from these tokenized documents:
-
-# In[43]:
-
-dictionary = corpora.Dictionary([arthur_tokens, galahad_tokens])
-corpus = [dictionary.doc2bow(doc) for doc in [arthur_tokens, galahad_tokens]]
-tfidf = models.TfidfModel(corpus, id2word=dictionary)
-
-
-# Then, we create matrix models of our corpus and query
-
-# In[44]:
-
-query = tfidf[dictionary.doc2bow(['peasant'])]
-index = similarities.MatrixSimilarity(tfidf[corpus])
-
-
-# And finally, we can test our query, "peasant" on the two documents in our corpus
-
-# In[45]:
-
-list(enumerate(index[query]))
-
-
-# So we see here that "peasant" does not match Galahad very well (a really bad match would have a negative value), and is more similar to the kind of speach output that we see from King Arthur.
+# 4. `429 = too many requests` - This means that you have exceeded Twitter's rate limit for whatever it is you are trying to do. Increase your  `time.sleep()`  value.
 
 # # Tabular data
 # 
@@ -437,7 +342,7 @@ list(enumerate(index[query]))
 # 
 # For this brief introduction to analyzing tabular data, we'll be using the [scipy stack](https://www.scipy.org/), which includes numpy, pandas, scipy, and "scikits" like sk-learn and sk-image.
 
-# In[46]:
+# In[20]:
 
 import pandas as pd
 
@@ -450,7 +355,7 @@ import pandas as pd
 # 
 # > note - pandas and R use the same name for their tables, but their behavior is often very different
 
-# In[47]:
+# In[21]:
 
 table = pd.DataFrame({'id': [1,2,3], 'name':['dillon','juan','andrew'], 'age':[47,27,23]})
 print(table)
@@ -458,14 +363,14 @@ print(table)
 
 # Variables in pandas are represented by a pandas-specific data structure, called a `Series`. You can grab a `Series` out of a `DataFrame` by using the slicing operator with the name of the variable that you want to pull.
 
-# In[48]:
+# In[22]:
 
 table['name'], type(table['name'])
 
 
 # We could have made each variable a `Series`, and then put it into the DataFrame object, but it's easier in this instance to pass in a dictionary where the keys are variable names and the values are lists. You can also modify a data frame in place using similar syntax:
 
-# In[49]:
+# In[23]:
 
 table['fingers'] = [9, 10, None]
 
@@ -474,24 +379,24 @@ table['fingers'] = [9, 10, None]
 # 
 # We've entered `None`, base python's missingness indicator, but pandas is going to swap this out with something else: 
 
-# In[50]:
+# In[24]:
 
 table['fingers']
 
 
 # You might be tempted to write your own control structures around these missing values (which are variably called `NaN`, `nan`, and `NA`), but this is always a bad idea:
 
-# In[51]:
+# In[25]:
 
 table['fingers'][2] == None
 
 
-# In[52]:
+# In[26]:
 
 table['fingers'][2] == 'NaN'
 
 
-# In[53]:
+# In[27]:
 
 type(table['fingers'][2]) == str
 
@@ -500,14 +405,14 @@ type(table['fingers'][2]) == str
 # 
 # To handle missing data, you'll need to use the pandas method `isnull`.
 
-# In[54]:
+# In[28]:
 
 pd.isnull(table['fingers'])
 
 
 # In the same way that we've been pulling out columns by name, you can pull out rows by index. If I want to grab the first row, I can use: 
 
-# In[55]:
+# In[29]:
 
 table[:1]
 
@@ -516,7 +421,7 @@ table[:1]
 # 
 # Unlike other software languages (R, I'm looking at you here), row indices in pandas are immutable. So, if I rearrange my data, the index also get shuffled.
 
-# In[56]:
+# In[30]:
 
 table.sort_values('age')
 
@@ -525,7 +430,7 @@ table.sort_values('age')
 # 
 # We can select parts of a `DataFrame` with conditional statements:
 
-# In[57]:
+# In[31]:
 
 table[table['age'] < 40]
 
@@ -534,28 +439,28 @@ table[table['age'] < 40]
 # 
 # As you might expect, tables in pandas can also be merged by keys. So, if we make a new dataset that shares an attribute in common:
 
-# In[58]:
+# In[32]:
 
 other_table = pd.DataFrame({
         'name':['dav', 'juan', 'dillon'], 
         'languages':['python','python','python']})
 
 
-# In[59]:
+# In[33]:
 
 table.merge(other_table, on='name')
 
 
 # Note that we have done an "inner join" here, which means we are only getting the intersection of the two tables. If we want the union, we can specify that we want an outer join:
 
-# In[60]:
+# In[34]:
 
 table.merge(other_table, on='name', how='outer')
 
 
 # Or maybe we want all of the data from `table`, but not `other_table`
 
-# In[61]:
+# In[35]:
 
 table.merge(other_table, on='name', how='left')
 
@@ -590,7 +495,7 @@ table.merge(other_table, on='name', how='left')
 # 
 # In this particular example, our data is too wide. If we create that dataframe in pandas
 
-# In[62]:
+# In[36]:
 
 wide_table = pd.DataFrame({'name' : ['dillon', 'juan', 'dav'],
                            'city1' : ['williamsburg', 'berkeley', 'cambridge'],
@@ -602,7 +507,7 @@ wide_table
 
 # We can make this longer in pandas using the `melt` function
 
-# In[63]:
+# In[37]:
 
 long_table = pd.melt(wide_table, id_vars = ['name'])
 long_table
@@ -612,7 +517,7 @@ long_table
 # 
 # > side note - this kind of inconsistency between `melt` and `pivot` is un-pythonic and should not be emulated
 
-# In[64]:
+# In[38]:
 
 long_table.pivot(columns='variable')
 
@@ -621,7 +526,7 @@ long_table.pivot(columns='variable')
 # 
 # One of the really cool things about pandas is that it allows you to have multiple indexes for rows and columns. Since pandas couldn't figure out what do with two kinds of value variables, it doubled up our column index. We can fix this by specifying that we only want the 'values' values
 
-# In[65]:
+# In[39]:
 
 long_table.pivot(index='name', columns='variable', values='value')
 
@@ -634,29 +539,29 @@ long_table.pivot(index='name', columns='variable', values='value')
 # 
 # Single descriptives have their own method calls in the `Series` class.
 
-# In[66]:
+# In[40]:
 
 table['fingers'].mean()
 
 
-# In[67]:
+# In[41]:
 
 table['fingers'].std()
 
 
-# In[68]:
+# In[42]:
 
 table['fingers'].quantile(.25)
 
 
-# In[69]:
+# In[43]:
 
 table['fingers'].kurtosis()
 
 
 # You can call several of these at once with the `describe` method
 
-# In[70]:
+# In[44]:
 
 table.describe()
 
@@ -667,7 +572,7 @@ table.describe()
 # 
 # We are also going to load in an actual dataset, as stats examples aren't very interesting with tiny bits of fake data.
 
-# In[71]:
+# In[45]:
 
 from scipy import stats
 data = pd.read_csv('../data/03_feedback.csv')
@@ -681,7 +586,7 @@ data = pd.read_csv('../data/03_feedback.csv')
 # 
 # If you only have two groups in your sample, you can use a t-test:
 
-# In[72]:
+# In[46]:
 
 i = data['inside_barriers'].dropna()
 o = data['outside_barriers'].dropna()
@@ -692,7 +597,7 @@ stats.ttest_ind(i, o)
 # 
 # If you have more than two groups (or levels) that you would like to compare, you'll have to use something like an ANOVA:
 
-# In[73]:
+# In[47]:
 
 m = data[data.gender == "Male/Man"]['outside_barriers'].dropna()
 f = data[data.gender == "Female/Woman"]['outside_barriers'].dropna()
@@ -706,7 +611,7 @@ stats.f_oneway(m, f, q)
 # 
 # One implementation of linear relationships is correlation testing:
 
-# In[74]:
+# In[48]:
 
 intermediate = data.dropna(subset=['inside_barriers', 'outside_barriers'])
 stats.pearsonr(intermediate['outside_barriers'], intermediate['inside_barriers'])
@@ -714,7 +619,7 @@ stats.pearsonr(intermediate['outside_barriers'], intermediate['inside_barriers']
 
 # At this point, we're going to pivot to using `statsmodels`
 
-# In[75]:
+# In[49]:
 
 import statsmodels.formula.api as smf
 
@@ -725,7 +630,7 @@ import statsmodels.formula.api as smf
 # outcome ~ var1 + var2
 # ```
 
-# In[76]:
+# In[50]:
 
 model_1 = smf.ols("inside_barriers ~ outside_barriers", data=data).fit()
 model_1
@@ -733,7 +638,7 @@ model_1
 
 # To get a summary of the test results, call the model's `summary` method
 
-# In[77]:
+# In[51]:
 
 model_1.summary()
 
@@ -742,21 +647,21 @@ model_1.summary()
 # 
 # > Raymond Hettinger would say that Python is a "consenting adult language"
 
-# In[78]:
+# In[52]:
 
 model_1.params['outside_barriers']
 
 
 # `statsmodels` also exposes methods for validity checking your regressions, like looking for outliers by influence statistics
 
-# In[79]:
+# In[53]:
 
 model_1.get_influence().summary_frame()
 
 
 # If, at this stage, you suspect that one or more outliers is unduly influencing your model fit, you can transform your results into robust OLS with a method call:
 
-# In[80]:
+# In[54]:
 
 model_1.get_robustcov_results().summary()
 
@@ -765,7 +670,7 @@ model_1.get_robustcov_results().summary()
 # 
 # If you want to add more predictors to your model, you can do so inside the function string:
 
-# In[81]:
+# In[55]:
 
 smf.ols("inside_barriers ~ outside_barriers + gender", data=data).fit().summary()
 
@@ -774,7 +679,7 @@ smf.ols("inside_barriers ~ outside_barriers + gender", data=data).fit().summary(
 # 
 # To add interactions to your model, you can use `:`, or `*` [for full factorial]
 
-# In[82]:
+# In[56]:
 
 smf.ols("inside_barriers ~ outside_barriers * gender", data=data).fit().summary()
 
@@ -785,7 +690,10 @@ smf.ols("inside_barriers ~ outside_barriers * gender", data=data).fit().summary(
 # 
 # If you don't have data of your own, you should practice with the test data we've given you here. For example, you could try to figure out:
 # 
-# 1. Is King Arthur happier than Sir Robin, based on his speech?
-# 2. Which character in Monty Python has the biggest vocabulary?
-# 3. Do different departments have the same gender ratios?
-# 4. What variable in this dataset is the best predictor for how useful people find our workshops to be?
+# 1. Do different departments have the same gender ratios?
+# 2. What variable in this dataset is the best predictor for how useful people find our workshops to be?
+
+# In[57]:
+
+
+

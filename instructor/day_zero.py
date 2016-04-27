@@ -801,3 +801,19 @@ my_apply(-1, chapman)
 # Pair up with your partner again - but this time, use the other person's computer. You are going to try the next challenge for today, which is in `challenges/00_introduction/B_syntax.py`.
 # 
 # When you think you have met the challenge, run `py.test test_B.py`. If you don't pass the tests, be sure to pay attention to the error messages!
+
+# ## Practice
+# 
+# Sometimes, the default settings in a datatype's methods don't do what we want. For example, if you try to replace non-existent characters in a string, like this:
+
+# In[82]:
+
+'aaaaaaaaaa'.replace('o','a')
+
+
+# Python doesn't warn you that there weren't any `o` to begin with. Write a function that does character substitutions in strings, but returns `False` if no characters are replaced.
+
+# In[83]:
+
+
+
