@@ -92,7 +92,7 @@ pprint(a_tweet)
 
 # #### Time for a challenge!
 # 
-# Let's see how much you remember about lists and dicts from yesterday. Go into the challenges directory and try your hand at `02_scraping/C_json.py`.
+# Let's see how much you remember about lists and dicts from yesterday. Go into the challenges directory and try your hand at `03_analysis/A_json.py`.
 
 # ## Authentication
 # 
@@ -314,9 +314,9 @@ with open('../etc/crond_example', 'r') as f:
 
 # At this point, you might be a little upset that you can't do this on your laptop, but the truth is you don't really want to run daemons and cronjobs on your laptop, which goes to sleep and runs out of batteries. This is what servers are for (like AWS).
 
-# ## Now it is time for you to make your own twitter bot!
+# ## Now it is time for you to look at a Twitter bot
 # 
-# To get you started, we've put a template in the `scripts` folder. Try it out, but be generous with your `time.sleep()` calls as the whole class is sharing this account.
+# We've put a template in the `scripts` folder for a basic, responsive Twitter bot. If there's time, you can try it out, but be generous with your `time.sleep()` calls as the whole class is sharing this account. The user credentials come from `@juanshishido`, so please don't get him banned from Twitter.
 # 
 # If you have tried to run this, or some of the earlier code in this notebook, you have probably encountered some of Twitter's error codes. Here are the most common, and why you are triggering them.
 # 
@@ -566,16 +566,93 @@ table['fingers'].kurtosis()
 table.describe()
 
 
+# ## Plotting
+# 
+# Sometimes, it can be easier to visualize results than to look at tables of numbers, both when you are sharing results and when you are exploring relationships in your data. To do this in Python, we'll be using `matplotlib`, the **Mat**lab **plot**ing **lib**rary.
+
+# In[45]:
+
+get_ipython().magic('matplotlib inline')
+from matplotlib import pyplot as plt
+
+
+# To practice plotting, we'll pull in some real world data -- the very same D-Lab feedback form data that you've been filling out after each day. (I told you we looked at it. I wasn't lying).
+# 
+# *Most* of the identifying information has been removed here, so what you'll see is better understood as feedback about the D-Lab in general, and not about a specific instructor or training. That said, some of the verbatims name individual instructors, but we ask that you not look into them individually.
+
+# In[46]:
+
+data = pd.read_csv('../data/03_feedback.csv')
+data.columns
+
+
+# We have several kinds of data from each respondent, including their opinions about the world:
+# > Do you experience barriers to access outside of the D-Lab (scale of 1-5)
+# 
+# Their experiences here:
+# > Do you experience these barriers inside the D-Lab (scale of 1-5)
+# 
+# And some personal information, like their academic department and gender.
+# 
+# We can start looking at the distributions of some of these data with histograms. Plotting numerical data in `matplotlib` is fairly simple:
+
+# In[47]:
+
+plt.hist(data.outside_barriers, bins=5, range=[0,5])
+plt.show()
+
+
+# In `matplotlib`, there are no defaults around non-numeric data, including: 
+# 
+# 1. where to place things
+# 2. how to name things
+# 3. how to summarize things
+# 
+# so the first things we'll need to do are create iterables with x values, x labels, and y values
+
+# In[48]:
+
+index = range(len(data.gender.unique()))
+x_ticks = data.gender.unique()
+y_vals = [data[data.gender == value].outside_barriers.mean() for value in x_ticks]
+y_error = [data[data.gender == value].outside_barriers.std() for value in x_ticks]
+plt.bar(index, y_vals, width=0.8, color = 'r', yerr=y_error)
+plt.xticks([item + 0.4 for item in index], x_ticks, rotation=90)
+plt.show()
+
+
+# We can try plotting the values for inside barriers versus outside barriers, to see if it looks like there is any kind of relationship there, but we're going to run into a problem...
+
+# In[49]:
+
+plt.scatter(data.outside_barriers, data.inside_barriers)
+plt.show()
+
+
+# The problem that we have is that these are scales, with values like `1` and `2` - there are no floats like `1.189`, so the dots *all overlap*.
+# 
+# We can fix this by adding a little bit of random noise to each value.
+
+# In[50]:
+
+from numpy.random import random
+x_vals = [value + random() for value in data.outside_barriers]
+y_vals = [value + random() for value in data.inside_barriers]
+plt.scatter(x_vals, y_vals)
+plt.show()
+
+
+# `matplotlib` is very customizable, but that means it also has a steep learning curve. If you'd like to know more, D-Lab does a whole workshop just on this one library.
+
 # ## Inferential statistics
 # 
 # pandas does not have statistical functions baked in, so we are going to call them from the `scipy.stats` library and the `statmodels` scikit.
 # 
 # We are also going to load in an actual dataset, as stats examples aren't very interesting with tiny bits of fake data.
 
-# In[45]:
+# In[51]:
 
 from scipy import stats
-data = pd.read_csv('../data/03_feedback.csv')
 
 
 # Using what you've learned so far about manipulating pandas objects, how would you find out the names of the variables in this dataset? Their datatypes? The distribution of their values?
@@ -586,7 +663,7 @@ data = pd.read_csv('../data/03_feedback.csv')
 # 
 # If you only have two groups in your sample, you can use a t-test:
 
-# In[46]:
+# In[52]:
 
 i = data['inside_barriers'].dropna()
 o = data['outside_barriers'].dropna()
@@ -597,7 +674,7 @@ stats.ttest_ind(i, o)
 # 
 # If you have more than two groups (or levels) that you would like to compare, you'll have to use something like an ANOVA:
 
-# In[47]:
+# In[53]:
 
 m = data[data.gender == "Male/Man"]['outside_barriers'].dropna()
 f = data[data.gender == "Female/Woman"]['outside_barriers'].dropna()
@@ -611,7 +688,7 @@ stats.f_oneway(m, f, q)
 # 
 # One implementation of linear relationships is correlation testing:
 
-# In[48]:
+# In[54]:
 
 intermediate = data.dropna(subset=['inside_barriers', 'outside_barriers'])
 stats.pearsonr(intermediate['outside_barriers'], intermediate['inside_barriers'])
@@ -619,7 +696,7 @@ stats.pearsonr(intermediate['outside_barriers'], intermediate['inside_barriers']
 
 # At this point, we're going to pivot to using `statsmodels`
 
-# In[49]:
+# In[55]:
 
 import statsmodels.formula.api as smf
 
@@ -630,7 +707,7 @@ import statsmodels.formula.api as smf
 # outcome ~ var1 + var2
 # ```
 
-# In[50]:
+# In[56]:
 
 model_1 = smf.ols("inside_barriers ~ outside_barriers", data=data).fit()
 model_1
@@ -638,7 +715,7 @@ model_1
 
 # To get a summary of the test results, call the model's `summary` method
 
-# In[51]:
+# In[57]:
 
 model_1.summary()
 
@@ -647,21 +724,21 @@ model_1.summary()
 # 
 # > Raymond Hettinger would say that Python is a "consenting adult language"
 
-# In[52]:
+# In[58]:
 
 model_1.params['outside_barriers']
 
 
 # `statsmodels` also exposes methods for validity checking your regressions, like looking for outliers by influence statistics
 
-# In[53]:
+# In[59]:
 
 model_1.get_influence().summary_frame()
 
 
 # If, at this stage, you suspect that one or more outliers is unduly influencing your model fit, you can transform your results into robust OLS with a method call:
 
-# In[54]:
+# In[60]:
 
 model_1.get_robustcov_results().summary()
 
@@ -670,7 +747,7 @@ model_1.get_robustcov_results().summary()
 # 
 # If you want to add more predictors to your model, you can do so inside the function string:
 
-# In[55]:
+# In[61]:
 
 smf.ols("inside_barriers ~ outside_barriers + gender", data=data).fit().summary()
 
@@ -679,7 +756,7 @@ smf.ols("inside_barriers ~ outside_barriers + gender", data=data).fit().summary(
 # 
 # To add interactions to your model, you can use `:`, or `*` [for full factorial]
 
-# In[56]:
+# In[62]:
 
 smf.ols("inside_barriers ~ outside_barriers * gender", data=data).fit().summary()
 
@@ -693,7 +770,7 @@ smf.ols("inside_barriers ~ outside_barriers * gender", data=data).fit().summary(
 # 1. Do different departments have the same gender ratios?
 # 2. What variable in this dataset is the best predictor for how useful people find our workshops to be?
 
-# In[57]:
+# In[63]:
 
 
 

@@ -128,6 +128,62 @@ x_is([1, 2, 3])
 x_is(None)
 
 
+# Sometimes, specifying `if/ifelse` decision trees can become very complicated, especially when dealing with foreign software that may present unexpected responses or datatypes. For example, data analysis software frequently encodes different types of null values in data, like:
+# 
+# * `0` for a value of 0
+# * `-` for missing, which should become `None` in Python
+# * `NaN` for something that can't be a number like infiniti, which might become `None` or `"NaN"`
+# 
+# Handling this with a bunch of `elif` statements hurts readibility in code, and can make it easier to commit errors while the code is being written. In Python, one way around this is to use `exception handling`. This means to let Python try to do something, and then tell it to do something else only if the original attempt fails. So, if we have data like:
+
+# In[13]:
+
+my_data = [1, 2, 0, None, "NaN"]
+
+
+# Trying to divide all of the values by a common denominator will raise a `TypeError` for both the `None` value and the string.
+
+# In[14]:
+
+new_data = []
+for item in my_data:
+    new_data.append(item/10)
+
+
+# We can get around this by wrapping this statement in a `try` clause
+
+# In[15]:
+
+new_data = []
+for item in my_data:
+    try:
+        new_data.append(item/10)
+    except:
+        pass
+print(new_data)
+
+
+# Notice that those two other values have disappeared -- we have steamrolled any problem data, and now have less than we started with. We have also steamrolled **every possible error**, which means if Python raised a `SteppedOnCrackError: mother's back broken`, you would never know.
+# 
+# Until you got home.
+# 
+# We can rewrite this to substitute `None`, but only if there is a `TypeError`.
+
+# In[16]:
+
+new_data = []
+for item in my_data:
+    try:
+        new_data.append(item/10)
+    except TypeError:
+        new_data.append(None)
+print(new_data)
+
+
+# #### Let's try a challenge!
+# 
+# Error handling - or having a computer program anticipate and respond to errors created by other functions - is a big part of programming. To give you a little more practice with this, we're going to have you team up with person sitting next to you and try challenge A in the challenges directory.
+
 # Control flow [**DOCS**](https://docs.python.org/3/tutorial/controlflow.html)
 
 # 
@@ -161,7 +217,7 @@ x_is(None)
 # 
 # Let's now try accessing the same server by using requests. Now, instead of sending the server a request through your browser, you are sending the server a request programmatically, through your console.  The server returns some output to you, which the requests module parses as a python object.  
 
-# In[13]:
+# In[17]:
 
 import requests
 
@@ -171,7 +227,7 @@ r = requests.get("http://www.google.com")
 # This response object contains various information about the request you sent to the server, the resources returned, and information about the response the server returned to you, among other information. These are accessible through the <i>__request__</i> attribute, the <i>__content__</i> attribute and the <i>__headers__</i> attribute respectively, which we'll each examine below.
 # 
 
-# In[14]:
+# In[18]:
 
 type(r.request), type(r.content), type(r.headers)
 
@@ -182,7 +238,7 @@ type(r.request), type(r.content), type(r.headers)
 # 
 # The content is the actual resource returned to us - let's take a look at the content first before examining the request and response objects more carefully. (We select the first 1000 characters b/c of the display limits of Jupyter/python notebook.)
 
-# In[15]:
+# In[19]:
 
 from pprint import pprint
 pprint(r.content[0:1000])
@@ -202,20 +258,20 @@ pprint(r.content[0:1000])
 
 # Let's print out the headers associated with our request. The __url__ and __method__ attribute contains other key information associated with the request. We can see the __headers__, __url__ and __method__ attributes in the dir, you can also use the __getattr__ function or just check to see if a word is in the headers list (if the headers list is too long).
 
-# In[16]:
+# In[20]:
 
 r.request.headers
 
 
 # ### Printing information associated with request 
 
-# In[17]:
+# In[21]:
 
 pprint("url: " + r.request.url)
 pprint("method: " + r.request.method)
 
 
-# In[18]:
+# In[22]:
 
 pprint(r.request.headers.items())
 
@@ -233,7 +289,7 @@ pprint(r.request.headers.items())
 # 
 # 
 
-# In[19]:
+# In[23]:
 
 pprint(response.headers.items())
 
@@ -389,7 +445,7 @@ Allow: /
 # 
 # First, import requests and BeautifulSoup. Downloading a html copy of the site is as simple as: 
 
-# In[20]:
+# In[24]:
 
 from bs4 import BeautifulSoup
 
@@ -399,7 +455,7 @@ print(r.content[0:300])
 
 # Once you've downloaded the html file, you'll now want to pass it into BeautifulSoup. BeautifulSoup converts the html file in an easily searchable and navigable structure, which you'll see in our examples below. 
 
-# In[21]:
+# In[25]:
 
 soup = BeautifulSoup(r.content)
 type(soup)
@@ -412,7 +468,7 @@ type(soup)
 # Let's first try to select this, and confirm we've selected the right element by printing out the result. In the code, we are telling soup to find any elements with the "div" element tag, with id "mw-pages" that we saw in the inspect element pane. 
 # 
 
-# In[22]:
+# In[26]:
 
 company_section = soup.findAll("div", {"id": "mw-pages"})
 print(type(company_section))
@@ -420,14 +476,14 @@ print(type(company_section))
 
 # As we navigate the result returned, we see that it is a "ResultSet", which suggests that it can be retrieved by index. You can also just try it out.  
 
-# In[23]:
+# In[27]:
 
 print(company_section[0])
 
 
 # You can see at the start of the element retrieved that it is indeed a division with id "mw-pages" - we can confirm by browsing the text that we've selected the correct element. Next, let's retrieve each section (corresponding to each alphabet), now searching the company section with class type "mw-category-group". 
 
-# In[24]:
+# In[28]:
 
 each_alphabet = company_section[0].find_all("div", {"class":"mw-category-group"})
 print(len(each_alphabet))
@@ -436,7 +492,7 @@ print(each_alphabet[0])
 
 # Finally, within each section, we want to pull out the individual hyperlinks corresponding to each company. Let's use the second element in the index (the letter "A" instead of the category group for "3") as it has more than one company.
 
-# In[25]:
+# In[29]:
 
 alphabet_a = each_alphabet[1]
 print(alphabet_a)
@@ -444,7 +500,7 @@ print(alphabet_a)
 
 # We next want to select all elements with the "li" tag, and print them out to make sure they correspond to what we expect to see on the page. 
 
-# In[26]:
+# In[30]:
 
 company_list = alphabet_a.find_all("li")
 for i in company_list:
@@ -454,7 +510,7 @@ for i in company_list:
 
 # If we select one company and print it out, we can see we're pretty close. 
 
-# In[27]:
+# In[31]:
 
 one_company = company_list[0]
 print(one_company)
@@ -462,21 +518,21 @@ print(one_company)
 
 # We can also select the next child element by doing the following:
 
-# In[28]:
+# In[32]:
 
 one_company.a
 
 
 # And finally, get the attributes associated with the "a" hyperlink tag, which returns a Python dictionary.  
 
-# In[29]:
+# In[33]:
 
 one_company.a.attrs
 
 
 # Now that we've received the element containing the element we want, we can also print out its parents to view the position within the html "tree." 
 
-# In[30]:
+# In[34]:
 
 print(type(one_company.a.parents))
 for i in one_company.a.parents:
@@ -487,7 +543,7 @@ for i in one_company.a.parents:
 
 # Finally, let's write a loop to store all of our desired hyperlink dictionaries in a single Python list. 
 
-# In[31]:
+# In[35]:
 
 link_list = []
 for each_section in company_section:
@@ -502,11 +558,11 @@ print(len(link_list))
 
 # #### Time for a challenge!
 # 
-# To make sure that everyone is on the same page (and to give you a little more practice dealing with HTML), let's partner up with the person next to you and try challenge A, on using html, in the challenges directory.
+# To make sure that everyone is on the same page (and to give you a little more practice dealing with HTML), let's partner up with the person next to you and try challenge B, on using html, in the challenges directory.
 
 # Now using the list, let's load the first page and locate the text elements we want 
 
-# In[32]:
+# In[36]:
 
 example_site = link_list[0]
 print(example_site)
@@ -514,14 +570,14 @@ print(example_site)
 company_page = requests.get("http://wikipedia.org" + example_site['href'])
 
 
-# In[33]:
+# In[37]:
 
 print(company_page.content[0:200])
 
 
 # In your browser, you should be using inspect element to confirm the position of the desired element in the html tree. We can see the element is a table with class name "infobox vcard". Let's try to select this next. First, we need the html document into soup as we did before. (We convert to string just to allow us to print the first 500 charactes of the text here.)
 
-# In[34]:
+# In[38]:
 
 soup = BeautifulSoup(company_page.content) 
 info_box = soup.find("table", {"class": "infobox vcard"})
@@ -530,7 +586,7 @@ print(str(info_box)[0:500])
 
 # Now, using the various tools we've had before, we can drill down to the specific element containing the data we need. As before, we select and print a single row to help guide the process. 
 
-# In[35]:
+# In[39]:
 
 table_elements = info_box.find_all("tr")
 one_row = table_elements[0]
@@ -539,7 +595,7 @@ print(one_row)
 
 # First, let's try to select the element containing the variable name "Type".
 
-# In[36]:
+# In[40]:
 
 print(one_row.th)
 print("")
@@ -550,7 +606,7 @@ print(one_row.th.div.text)
 
 # Next, let's select the element containing the variable value, in this case "Subsidiary". 
 
-# In[37]:
+# In[41]:
 
 print(one_row.td)
 print("")
@@ -559,7 +615,7 @@ print(one_row.td.text)
 
 # Now, let's loop through all rows to get all data that's available on the company. Depending on how well-structured the data is, this can be something of a trial and error process. 
 
-# In[38]:
+# In[42]:
 
 for one_row in table_elements:
     print(one_row.th.div.text + ": " + one_row.td.text)
@@ -567,7 +623,7 @@ for one_row in table_elements:
 
 # We get an AttributeError for the "NoneType" object due to some of the "th" elements being empty. If we do some simple Exception capturing, we can get the loop to run through. 
 
-# In[39]:
+# In[43]:
 
 for one_row in table_elements:
     try:
@@ -576,13 +632,9 @@ for one_row in table_elements:
         continue
 
 
-# #### Let's try a challenge!
-# 
-# Error handling - or having a computer program anticipate and respond to errors created by other functions - is a big part of programming. To give you a little more practice with this, we're going to have you team up with person sitting next to you and try challenge B in the challenges directory.
-
 # Now that we have the data we need, let's store it in a Python dictionary. 
 
-# In[40]:
+# In[44]:
 
 new_dict = {}
 for one_row in table_elements:
@@ -595,7 +647,7 @@ for one_row in table_elements:
 
 # We can browse the dictionary to make sure it is capturing the data correctly. 
 
-# In[41]:
+# In[45]:
 
 print(new_dict.keys())
 print(new_dict)
@@ -606,7 +658,7 @@ print(new_dict)
 # The next step is to write an overall loop so that we can collect the "infobox vcard" data for all elements in our list. info_box = soup.find("table", {"class": "infobox vcard"})
 # 
 
-# In[42]:
+# In[46]:
 
 list_of_dicts = []
 
@@ -636,7 +688,7 @@ print(len(list_of_dicts))
 
 # Let's browse our list_of_dicts object to make sure it contains the data we need. 
 
-# In[43]:
+# In[47]:
 
 print(list_of_dicts)
 
@@ -645,7 +697,7 @@ print(list_of_dicts)
 # 
 # As the entire class will be sharing the same IP, it's recommended that you add a longer wait time and limit the number of companies from link_list you scrape while in class. 
 
-# In[44]:
+# In[48]:
 
 import time 
 
@@ -680,7 +732,7 @@ for each_link in link_list[0:3]:
 # 
 # To store this data flexibly, we can iterate through all our dictionaries and collect all keys from them. 
 
-# In[45]:
+# In[49]:
 
 key_list = []
 for each_dict in list_of_dicts:
@@ -691,7 +743,7 @@ print(key_list)
 
 # Next, we convert the list to a set to remove all repeat keys. This then contains all unique keys across our dictionaries. 
 
-# In[46]:
+# In[50]:
 
 key_set = set(key_list)
 print(key_set)
@@ -699,7 +751,7 @@ print(key_set)
 
 # We convert the set back to a list (and sort it) as csv.DictWriter takes a list for its fieldnames parameter. 
 
-# In[47]:
+# In[51]:
 
 final_key_list = sorted(list(key_set))
 print(final_key_list)
@@ -707,7 +759,7 @@ print(final_key_list)
 
 # With our complete key list, we can now write our dictionary into a csv file.
 
-# In[48]:
+# In[52]:
 
 import csv
 
