@@ -18,4 +18,4 @@ def test_text():
     assert not A.text
 
 def test_header():
-    assert len(A.header) == 17
+    assert len(A.header) == 90
