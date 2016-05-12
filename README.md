@@ -42,7 +42,7 @@ The standard Drupal workshop descriptions and facetweet postings for this worksh
 * `instructor/` : teaching notes
 * `scripts/`
     * `generate_tables.py` : for generating random tabular data
-    * `regenrate_documents.sh` : for regenerating `.py` and `.pdf` files from `.ipynb`
+    * `regenerate_documents.sh` : for regenerating `.py` and `.pdf` files from `.ipynb`
     * `simple.py` : sample python script used in Day 0
     * `twitter_bot.py` : sample python script used in Day 2
 
