@@ -3,8 +3,8 @@
 import pytest
 import time
 
-import B_try as B
+import A_try as A
 
-def test_B():
-    B.backup_files()
-    B.backup_files()
+def test_A():
+    A.backup_files()
+    A.backup_files()
