@@ -1,21 +1,10 @@
 #!/bin/env python
 
 import pytest
+import time
 
-import A_html as A
+import A_try as A
 
-def test_page():
-    page = A.page
-    assert page.ok
-    assert page.url == 'https://isitchristmas.com/'
-    assert 'Built by Eric Mill' in page.text
-
-def test_text():
-    assert A.title in [
-    'Is it Christmas?',
-    '<title>Is it Christmas?</title>',
-    ]
-    assert not A.text
-
-def test_header():
-    assert len(A.header) == 17
+def test_A():
+    A.backup_files()
+    A.backup_files()

@@ -1,24 +1,20 @@
 #!/bin/env python
 
-import json
 import os
+import pandas as pd
 import pytest
 
-import B_stemming as B
+import B_tables as B
 
-def test_token():
-    truth = hasattr(B, 'nltk') + hasattr(B, 'word_tokenize') + hasattr(B, 'wordpunct_tokenize')
-    assert truth > 0
-    assert len(B.token_list) >= 670
+def test_import():
+    assert isinstance(B.person_data, pd.DataFrame)
+    assert B.person_data.shape == (100,3)
 
-def test_stemmer():
-    fp = '../../data/stemmed_document.json'
-    assert os.path.isfile(fp)
-    with open(fp, 'r') as f:
-        d = json.load(f)
-    assert len(d) == len(B.token_list)
-    for unstemmed_word in ['fundamentals', 'discover', 'very', 'secure']:
-        assert unstemmed_word not in d
+def test_merge():
+    assert B.all_data.shape == (103,5)
 
-def test_stop_words():
-    assert type(B.stop_list) is list
+def test_new():
+    assert os.path.isfile('../../data/height_above_sea.csv')
+    data = pd.read_csv('../../data/height_above_sea.csv')
+    assert len(data) in [100, 103]
+    assert "height_above_sea" in data

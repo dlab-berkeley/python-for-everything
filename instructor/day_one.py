@@ -7,11 +7,10 @@
 
 # 1. [Data Model](#Data-Model)
 # 2. [Data Structures](#Data-Structures)
-# 3. [Control Flow](#Control-Flow)
-# 4. [Input and Output](#Input-and-Output)
-# 5. [`os`](#os)
-# 6. [`glob`](#glob)
-# 7. [`subprocess`](#subprocess)
+# 3. [Input and Output](#Input-and-Output)
+# 4. [`os`](#os)
+# 5. [`glob`](#glob)
+# 6. [`subprocess`](#subprocess)
 # 
 # Links to documentation will be provided at the beginning and end of each section. Look for: **DOCS**.
 
@@ -1193,115 +1192,6 @@ print('\ndone')
 
 # ### `if`
 
-# In many cases, it's useful to control the order in which statements or function calls are executed or evaluated. A control flow statement determines which path or paths in a program should be followed. Control flow statements, for example, can:
-# 
-# * execute a set of statements if a condition or certain conditions are met
-# * execute a set of statements `n` times until a condition or certain conditions are met
-# * stop the execution of a program
-# 
-# How can we achieve this? The most well-known statement type is the `if` statement.
-
-# In[152]:
-
-x = 0
-
-
-# In[153]:
-
-if x == 0:
-    print('x is zero')
-
-
-# `if` statements make use of boolean expressions. If the expression (or set of expressions) evaluate to `True`, the indented statement gets executed. Otherwise, nothing happens.
-
-# In[154]:
-
-x = 1
-
-
-# In[155]:
-
-if x == 0:
-    print('x is zero')
-
-
-# The code above is referred to as a clause. Clauses contain "headers" and "bodies." Clause headers begin with identifying keywords&mdash;in this case, `if`&mdash;include boolean expressions, and end with colons. The body is a group of indented statements controlled by the clause. This is also known as a "block."
-# 
-# Compound statements are made up of one or more clauses. For example, there might be two possibilities in which case we use the `else` keyword. We can combine the above as follows.
-
-# In[156]:
-
-if x == 0:
-    print('x is zero')
-else:
-    print('x is not zero')
-
-
-# Notice that clause headers are at the same indentation level.
-# 
-# When there are more than two possibilities, we can use what are called chained conditionals. For this, we use the `elif` keyword.
-
-# In[157]:
-
-if x == 0:
-    print('x is zero')
-elif x < 0:
-    print('x is negative')
-elif x > 0:
-    print('x is positive')
-
-
-# Of course, the code above only works if `x` is numeric. Assuming this is the case, all possible values of `x` are listed. Because of this, we can change the last clause (`elif x > 0`) to `else`.
-# 
-# There isn't a "right" way to do this. A good approach is to write it such that its easily readable for yourself and others.
-# 
-# What if `x` is *not* numeric? With the code as is, we'll get a `TypeError`. So, let's generalize what we have and wrap it in a function.
-
-# In[158]:
-
-def x_is(x):
-    if type(x) is str:
-        print('x is str')
-    elif type(x) in [int, float]:
-        if x == 0:
-            print('x is zero')
-        elif x < 0:
-            print('x is negative')
-        elif x > 0:
-            print('x is positive')
-    else:
-        print('invalid x value')
-
-
-# Before we call our function, let's explain what's going on. Our function, as defined, is an example of a "nested conditional." We first perform a type check and, if `x` is numeric, there are another set of conditions which are checked.
-
-# In[159]:
-
-x_is('ucb')
-
-
-# In[160]:
-
-x_is(1)
-
-
-# In[161]:
-
-x_is(0)
-
-
-# In[162]:
-
-x_is([1, 2, 3])
-
-
-# In[163]:
-
-x_is(None)
-
-
-# Control flow [**DOCS**](https://docs.python.org/3/tutorial/controlflow.html)
-
 # ## Input and Output
 
 # [**DOCS**](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
@@ -1312,7 +1202,7 @@ x_is(None)
 # 
 # The `open()` function is typically used with two arguments&mdash;the filename and the "mode." The mode describes how the file will be used. The default is `'r'`, which stands for "read only."
 
-# In[164]:
+# In[152]:
 
 f = open('../data/01_lorem-ipsum.txt', 'r')
 
@@ -1321,7 +1211,7 @@ f = open('../data/01_lorem-ipsum.txt', 'r')
 # 
 # The `.read(size)` method reads the contents of the file object. The optional numeric argument, *`size`*, corresponds to the number of bytes that should be read. This is useful if the data file is large. If we omit `size`, the entire contents of the file will be read and returned.
 
-# In[165]:
+# In[153]:
 
 f.read()
 
@@ -1330,19 +1220,19 @@ f.read()
 # 
 # Because we'd like to show a few other methods, we can return to the beginning of the file using the `.seek()` method, passing in `0` as the argument.
 
-# In[166]:
+# In[154]:
 
 f.seek(0)
 
 
 # Let's say we wanted to read the file, line-by-line. We can accomplish this using the `.readline()` method. The end of a "line" is identified by the presence of a new line character, `\n`. You can see some in the text output above.
 
-# In[167]:
+# In[155]:
 
 f.readline()
 
 
-# In[168]:
+# In[156]:
 
 f.readline()
 
@@ -1351,7 +1241,7 @@ f.readline()
 # 
 # If you ever need to know the file object's current position, use the `.tell()` method.
 
-# In[169]:
+# In[157]:
 
 f.tell()
 
@@ -1360,12 +1250,12 @@ f.tell()
 # 
 # We can also loop over the file object. Let's return to the start of the file first.
 
-# In[170]:
+# In[158]:
 
 f.seek(0)
 
 
-# In[171]:
+# In[159]:
 
 for line in f:
     print(line)
@@ -1373,14 +1263,14 @@ for line in f:
 
 # When we're done interacting with a file, that fie should always be closed.
 
-# In[172]:
+# In[160]:
 
 f.close()
 
 
 # We can always check whether a file is closed by using the following.
 
-# In[173]:
+# In[161]:
 
 f.closed
 
@@ -1389,7 +1279,7 @@ f.closed
 # 
 # Let's print each line on our document using this syntax.
 
-# In[174]:
+# In[162]:
 
 with open('../data/01_lorem-ipsum.txt', 'r') as f:
     for line in f:
@@ -1398,7 +1288,7 @@ with open('../data/01_lorem-ipsum.txt', 'r') as f:
 
 # We can also check that the file was, indeed, closed.
 
-# In[175]:
+# In[163]:
 
 f.closed
 
@@ -1407,7 +1297,7 @@ f.closed
 # 
 # Let's start by creating a new file.
 
-# In[176]:
+# In[164]:
 
 with open('first-write.txt', 'w') as f:
     f.write('this is our first line\n')
@@ -1416,7 +1306,7 @@ with open('first-write.txt', 'w') as f:
 
 # Now, let's check the contents of the file.
 
-# In[177]:
+# In[165]:
 
 with open('first-write.txt', 'r') as f:
     for line in f:
@@ -1427,7 +1317,7 @@ with open('first-write.txt', 'r') as f:
 # 
 # Now, let's append to our file.
 
-# In[178]:
+# In[166]:
 
 with open('first-write.txt', 'a') as append_file:
     append_file.write('\nthis is the real last line')
@@ -1435,7 +1325,7 @@ with open('first-write.txt', 'a') as append_file:
 
 # Notice that we add a new line character to the beginning of this third line.
 
-# In[179]:
+# In[167]:
 
 with open('first-write.txt') as infile:
     for row in infile:
@@ -1452,7 +1342,7 @@ with open('first-write.txt') as infile:
 # 
 # We can open comma-delimited CSV files with `open()`, too. Let's open an example CSV file in `data/` called `roster.csv`.
 
-# In[180]:
+# In[168]:
 
 with open('../data/01_roster.csv', 'r') as roster:
     for student_data in roster:
@@ -1463,7 +1353,7 @@ with open('../data/01_roster.csv', 'r') as roster:
 # 
 # In some cases&mdash;say, if we need to calculate the average age of these students&mdash;we don't actually want to iterate over the first row, which is often called the "header."
 
-# In[181]:
+# In[169]:
 
 with open('../data/01_roster.csv', 'r') as roster:
     next(roster)
@@ -1477,12 +1367,12 @@ with open('../data/01_roster.csv', 'r') as roster:
 # 
 # To help with situations like these, Python has a built-in `csv` module which includes lots of functionality for working with these types of types. Let's show how we could use this to calculate the average age of the students.
 
-# In[182]:
+# In[170]:
 
 import csv
 
 
-# In[183]:
+# In[171]:
 
 ages = []
 with open('../data/01_roster.csv', 'r') as f:
@@ -1496,12 +1386,12 @@ with open('../data/01_roster.csv', 'r') as f:
 # 
 # Now, we can create a new variable that holds the ages and calculate the average.
 
-# In[184]:
+# In[172]:
 
 ages_mean = sum(ages) / len(ages)
 
 
-# In[185]:
+# In[173]:
 
 print('The average age of students in the roster is: %.2f' % ages_mean)
 
@@ -1518,21 +1408,21 @@ print('The average age of students in the roster is: %.2f' % ages_mean)
 # 
 # To start, let's import `os`.
 
-# In[186]:
+# In[174]:
 
 import os
 
 
 # Let's begin by listing our current working directory.
 
-# In[187]:
+# In[175]:
 
 os.getcwd()
 
 
 # We know we have a `data/` directory in our repository, but we might not know its contents. We can get that information by using the following.
 
-# In[188]:
+# In[176]:
 
 os.listdir('../data/')
 
@@ -1541,14 +1431,14 @@ os.listdir('../data/')
 # 
 # If we were writing a Python script that used one of these files, we might want to include checks for whether or not the files exist. We can also accomplish this with `os`. First, we can check if a directory exists.
 
-# In[189]:
+# In[177]:
 
 os.path.isdir('../data/')
 
 
 # We can also check to see if a file exists.
 
-# In[190]:
+# In[178]:
 
 os.path.isfile('../data/01_roster.csv')
 
@@ -1557,21 +1447,21 @@ os.path.isfile('../data/01_roster.csv')
 # 
 # If a directory doesn't exist, we can create it from within Python. This is accomplished using the `mkdir()` function, which takes a file path as an argument.
 
-# In[191]:
+# In[179]:
 
 os.mkdir('newdir')
 
 
 # Let's check the contents of the current directory.
 
-# In[192]:
+# In[180]:
 
 os.listdir()
 
 
 # We can use the `rmdir()` function to remove `newdir/`.
 
-# In[193]:
+# In[181]:
 
 os.rmdir('newdir')
 
@@ -1599,12 +1489,12 @@ os.rmdir('newdir')
 # 
 # Above, when we used `os.listdir()` in our current directory, the returned list included the Jupyter notebook files as well as a directory and the `.ipynb_checkpoints` file. Let's see what `glob` returns.
 
-# In[194]:
+# In[182]:
 
 import glob
 
 
-# In[195]:
+# In[183]:
 
 glob.glob('*')
 
@@ -1613,14 +1503,14 @@ glob.glob('*')
 # 
 # Let's use `glob` to show only the `.ipynb` files.
 
-# In[196]:
+# In[184]:
 
 glob.glob('*.ipynb')
 
 
 # If we want directories only.
 
-# In[197]:
+# In[185]:
 
 glob.glob('*/')
 
@@ -1629,7 +1519,7 @@ glob.glob('*/')
 # 
 # Let's create a few directories (and a file) to make this concrete.
 
-# In[198]:
+# In[186]:
 
 get_ipython().system('mkdir test')
 get_ipython().system('mkdir test1')
@@ -1640,7 +1530,7 @@ get_ipython().system('touch test.txt')
 
 # Note that the `!` before each line above allows us to run shell commands from within the notebook.
 
-# In[199]:
+# In[187]:
 
 glob.glob('test*')
 
@@ -1649,14 +1539,14 @@ glob.glob('test*')
 # 
 # We can also match directories only.
 
-# In[200]:
+# In[188]:
 
 glob.glob('test*/')
 
 
 # To match a single character, we can use the `?` wildcard character. This matches any character in the specified position of the name.
 
-# In[201]:
+# In[189]:
 
 glob.glob('test?')
 
@@ -1665,7 +1555,7 @@ glob.glob('test?')
 
 # Next, let's show what the character range (`[]`) wildcard can do. We'll create a few more directories (we'll clean this up when we're done).
 
-# In[202]:
+# In[190]:
 
 get_ipython().system('mkdir tset0')
 get_ipython().system('mkdir tset1')
@@ -1676,7 +1566,7 @@ get_ipython().system('mkdir tset50')
 
 # The character range wildcard matches a single character in the specified range.
 
-# In[203]:
+# In[191]:
 
 glob.glob('tset[0-1]')
 
@@ -1685,14 +1575,14 @@ glob.glob('tset[0-1]')
 # 
 # If we want the directories that end with *two* digits, we can do the following.
 
-# In[204]:
+# In[192]:
 
 glob.glob('tset[0-9][0-9]')
 
 
 # The character range wildcard also works on letters.
 
-# In[205]:
+# In[193]:
 
 glob.glob('t[a-z][a-z]t?')
 
@@ -1701,7 +1591,7 @@ glob.glob('t[a-z][a-z]t?')
 # 
 # An alternative way of getting the same result is as follows.
 
-# In[206]:
+# In[194]:
 
 glob.glob('t??t?')
 
@@ -1710,7 +1600,7 @@ glob.glob('t??t?')
 # 
 # Let's clean up our directory.
 
-# In[207]:
+# In[195]:
 
 get_ipython().system('rm -rf test*')
 get_ipython().system('rm -rf tset*')
@@ -1732,12 +1622,12 @@ get_ipython().system('rm -rf tset*')
 # 
 # When might we want to spawn new processes? One example is executing a Python script&mdash;much like you would from the command line&mdash;within Python. Although we know that we can use the `!` to run shell commands, this only works from within the notebook. So, let's use `subprocess` to execute a Python script in `scripts/` named `simple.py`.
 
-# In[208]:
+# In[196]:
 
 import subprocess
 
 
-# In[209]:
+# In[197]:
 
 subprocess.check_output(['python', '../scripts/simple.py'])
 
@@ -1748,9 +1638,24 @@ subprocess.check_output(['python', '../scripts/simple.py'])
 # 
 # The `b''` prefex indicates that the returned value is a bytes type as opposed to a `str` type. If needed, we can convert this using the following.
 
-# In[210]:
+# In[198]:
 
 subprocess.check_output(['python', '../scripts/simple.py']).decode('utf-8')
 
 
 # `subprocess` [**DOCS**](https://docs.python.org/3/library/subprocess.html)
+
+# ## Practice
+# 
+# For practice see if you can complete Jon Bentley's 1986 challenge to Donald Knuth in Python:
+# 
+# ```
+# Read a file of text, determine the n most frequently used words, and print out a sorted list of those words along with their frequencies.
+# ```
+# 
+# You should be able to do this just using file i/o, collections, and string methods.
+
+# In[199]:
+
+
+

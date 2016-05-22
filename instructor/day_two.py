@@ -21,6 +21,171 @@
 # ** 2) Twitter API **  
 #   
 
+# In many cases, it's useful to control the order in which statements or function calls are executed or evaluated. A control flow statement determines which path or paths in a program should be followed. Control flow statements, for example, can:
+# 
+# * execute a set of statements if a condition or certain conditions are met
+# * execute a set of statements `n` times until a condition or certain conditions are met
+# * stop the execution of a program
+# 
+# How can we achieve this? The most well-known statement type is the `if` statement.
+
+# In[1]:
+
+x = 0
+
+
+# In[2]:
+
+if x == 0:
+    print('x is zero')
+
+
+# `if` statements make use of boolean expressions. If the expression (or set of expressions) evaluate to `True`, the indented statement gets executed. Otherwise, nothing happens.
+
+# In[3]:
+
+x = 1
+
+
+# In[4]:
+
+if x == 0:
+    print('x is zero')
+
+
+# The code above is referred to as a clause. Clauses contain "headers" and "bodies." Clause headers begin with identifying keywords&mdash;in this case, `if`&mdash;include boolean expressions, and end with colons. The body is a group of indented statements controlled by the clause. This is also known as a "block."
+# 
+# Compound statements are made up of one or more clauses. For example, there might be two possibilities in which case we use the `else` keyword. We can combine the above as follows.
+
+# In[5]:
+
+if x == 0:
+    print('x is zero')
+else:
+    print('x is not zero')
+
+
+# Notice that clause headers are at the same indentation level.
+# 
+# When there are more than two possibilities, we can use what are called chained conditionals. For this, we use the `elif` keyword.
+
+# In[6]:
+
+if x == 0:
+    print('x is zero')
+elif x < 0:
+    print('x is negative')
+elif x > 0:
+    print('x is positive')
+
+
+# Of course, the code above only works if `x` is numeric. Assuming this is the case, all possible values of `x` are listed. Because of this, we can change the last clause (`elif x > 0`) to `else`.
+# 
+# There isn't a "right" way to do this. A good approach is to write it such that its easily readable for yourself and others.
+# 
+# What if `x` is *not* numeric? With the code as is, we'll get a `TypeError`. So, let's generalize what we have and wrap it in a function.
+
+# In[7]:
+
+def x_is(x):
+    if type(x) is str:
+        print('x is str')
+    elif type(x) in [int, float]:
+        if x == 0:
+            print('x is zero')
+        elif x < 0:
+            print('x is negative')
+        elif x > 0:
+            print('x is positive')
+    else:
+        print('invalid x value')
+
+
+# Before we call our function, let's explain what's going on. Our function, as defined, is an example of a "nested conditional." We first perform a type check and, if `x` is numeric, there are another set of conditions which are checked.
+
+# In[8]:
+
+x_is('ucb')
+
+
+# In[9]:
+
+x_is(1)
+
+
+# In[10]:
+
+x_is(0)
+
+
+# In[11]:
+
+x_is([1, 2, 3])
+
+
+# In[12]:
+
+x_is(None)
+
+
+# Sometimes, specifying `if/ifelse` decision trees can become very complicated, especially when dealing with foreign software that may present unexpected responses or datatypes. For example, data analysis software frequently encodes different types of null values in data, like:
+# 
+# * `0` for a value of 0
+# * `-` for missing, which should become `None` in Python
+# * `NaN` for something that can't be a number like infiniti, which might become `None` or `"NaN"`
+# 
+# Handling this with a bunch of `elif` statements hurts readibility in code, and can make it easier to commit errors while the code is being written. In Python, one way around this is to use `exception handling`. This means to let Python try to do something, and then tell it to do something else only if the original attempt fails. So, if we have data like:
+
+# In[13]:
+
+my_data = [1, 2, 0, None, "NaN"]
+
+
+# Trying to divide all of the values by a common denominator will raise a `TypeError` for both the `None` value and the string.
+
+# In[14]:
+
+new_data = []
+for item in my_data:
+    new_data.append(item/10)
+
+
+# We can get around this by wrapping this statement in a `try` clause
+
+# In[15]:
+
+new_data = []
+for item in my_data:
+    try:
+        new_data.append(item/10)
+    except:
+        pass
+print(new_data)
+
+
+# Notice that those two other values have disappeared -- we have steamrolled any problem data, and now have less than we started with. We have also steamrolled **every possible error**, which means if Python raised a `SteppedOnCrackError: mother's back broken`, you would never know.
+# 
+# Until you got home.
+# 
+# We can rewrite this to substitute `None`, but only if there is a `TypeError`.
+
+# In[16]:
+
+new_data = []
+for item in my_data:
+    try:
+        new_data.append(item/10)
+    except TypeError:
+        new_data.append(None)
+print(new_data)
+
+
+# #### Let's try a challenge!
+# 
+# Error handling - or having a computer program anticipate and respond to errors created by other functions - is a big part of programming. To give you a little more practice with this, we're going to have you team up with person sitting next to you and try challenge A in the challenges directory.
+
+# Control flow [**DOCS**](https://docs.python.org/3/tutorial/controlflow.html)
+
 # 
 # # Background:
 # 
@@ -52,7 +217,7 @@
 # 
 # Let's now try accessing the same server by using requests. Now, instead of sending the server a request through your browser, you are sending the server a request programmatically, through your console.  The server returns some output to you, which the requests module parses as a python object.  
 
-# In[1]:
+# In[17]:
 
 import requests
 
@@ -62,7 +227,7 @@ r = requests.get("http://www.google.com")
 # This response object contains various information about the request you sent to the server, the resources returned, and information about the response the server returned to you, among other information. These are accessible through the <i>__request__</i> attribute, the <i>__content__</i> attribute and the <i>__headers__</i> attribute respectively, which we'll each examine below.
 # 
 
-# In[2]:
+# In[18]:
 
 type(r.request), type(r.content), type(r.headers)
 
@@ -73,7 +238,7 @@ type(r.request), type(r.content), type(r.headers)
 # 
 # The content is the actual resource returned to us - let's take a look at the content first before examining the request and response objects more carefully. (We select the first 1000 characters b/c of the display limits of Jupyter/python notebook.)
 
-# In[3]:
+# In[19]:
 
 from pprint import pprint
 pprint(r.content[0:1000])
@@ -93,20 +258,20 @@ pprint(r.content[0:1000])
 
 # Let's print out the headers associated with our request. The __url__ and __method__ attribute contains other key information associated with the request. We can see the __headers__, __url__ and __method__ attributes in the dir, you can also use the __getattr__ function or just check to see if a word is in the headers list (if the headers list is too long).
 
-# In[4]:
+# In[20]:
 
 r.request.headers
 
 
 # ### Printing information associated with request 
 
-# In[5]:
+# In[21]:
 
 pprint("url: " + r.request.url)
 pprint("method: " + r.request.method)
 
 
-# In[6]:
+# In[22]:
 
 pprint(r.request.headers.items())
 
@@ -124,7 +289,7 @@ pprint(r.request.headers.items())
 # 
 # 
 
-# In[7]:
+# In[23]:
 
 pprint(response.headers.items())
 
@@ -280,7 +445,7 @@ Allow: /
 # 
 # First, import requests and BeautifulSoup. Downloading a html copy of the site is as simple as: 
 
-# In[8]:
+# In[24]:
 
 from bs4 import BeautifulSoup
 
@@ -290,7 +455,7 @@ print(r.content[0:300])
 
 # Once you've downloaded the html file, you'll now want to pass it into BeautifulSoup. BeautifulSoup converts the html file in an easily searchable and navigable structure, which you'll see in our examples below. 
 
-# In[9]:
+# In[25]:
 
 soup = BeautifulSoup(r.content)
 type(soup)
@@ -303,7 +468,7 @@ type(soup)
 # Let's first try to select this, and confirm we've selected the right element by printing out the result. In the code, we are telling soup to find any elements with the "div" element tag, with id "mw-pages" that we saw in the inspect element pane. 
 # 
 
-# In[10]:
+# In[26]:
 
 company_section = soup.findAll("div", {"id": "mw-pages"})
 print(type(company_section))
@@ -311,14 +476,14 @@ print(type(company_section))
 
 # As we navigate the result returned, we see that it is a "ResultSet", which suggests that it can be retrieved by index. You can also just try it out.  
 
-# In[11]:
+# In[27]:
 
 print(company_section[0])
 
 
 # You can see at the start of the element retrieved that it is indeed a division with id "mw-pages" - we can confirm by browsing the text that we've selected the correct element. Next, let's retrieve each section (corresponding to each alphabet), now searching the company section with class type "mw-category-group". 
 
-# In[12]:
+# In[28]:
 
 each_alphabet = company_section[0].find_all("div", {"class":"mw-category-group"})
 print(len(each_alphabet))
@@ -327,7 +492,7 @@ print(each_alphabet[0])
 
 # Finally, within each section, we want to pull out the individual hyperlinks corresponding to each company. Let's use the second element in the index (the letter "A" instead of the category group for "3") as it has more than one company.
 
-# In[13]:
+# In[29]:
 
 alphabet_a = each_alphabet[1]
 print(alphabet_a)
@@ -335,7 +500,7 @@ print(alphabet_a)
 
 # We next want to select all elements with the "li" tag, and print them out to make sure they correspond to what we expect to see on the page. 
 
-# In[14]:
+# In[30]:
 
 company_list = alphabet_a.find_all("li")
 for i in company_list:
@@ -345,7 +510,7 @@ for i in company_list:
 
 # If we select one company and print it out, we can see we're pretty close. 
 
-# In[15]:
+# In[31]:
 
 one_company = company_list[0]
 print(one_company)
@@ -353,21 +518,21 @@ print(one_company)
 
 # We can also select the next child element by doing the following:
 
-# In[16]:
+# In[32]:
 
 one_company.a
 
 
 # And finally, get the attributes associated with the "a" hyperlink tag, which returns a Python dictionary.  
 
-# In[17]:
+# In[33]:
 
 one_company.a.attrs
 
 
 # Now that we've received the element containing the element we want, we can also print out its parents to view the position within the html "tree." 
 
-# In[18]:
+# In[34]:
 
 print(type(one_company.a.parents))
 for i in one_company.a.parents:
@@ -378,7 +543,7 @@ for i in one_company.a.parents:
 
 # Finally, let's write a loop to store all of our desired hyperlink dictionaries in a single Python list. 
 
-# In[19]:
+# In[35]:
 
 link_list = []
 for each_section in company_section:
@@ -393,11 +558,11 @@ print(len(link_list))
 
 # #### Time for a challenge!
 # 
-# To make sure that everyone is on the same page (and to give you a little more practice dealing with HTML), let's partner up with the person next to you and try challenge A, on using html, in the challenges directory.
+# To make sure that everyone is on the same page (and to give you a little more practice dealing with HTML), let's partner up with the person next to you and try challenge B, on using html, in the challenges directory.
 
 # Now using the list, let's load the first page and locate the text elements we want 
 
-# In[20]:
+# In[36]:
 
 example_site = link_list[0]
 print(example_site)
@@ -405,14 +570,14 @@ print(example_site)
 company_page = requests.get("http://wikipedia.org" + example_site['href'])
 
 
-# In[21]:
+# In[37]:
 
 print(company_page.content[0:200])
 
 
 # In your browser, you should be using inspect element to confirm the position of the desired element in the html tree. We can see the element is a table with class name "infobox vcard". Let's try to select this next. First, we need the html document into soup as we did before. (We convert to string just to allow us to print the first 500 charactes of the text here.)
 
-# In[22]:
+# In[38]:
 
 soup = BeautifulSoup(company_page.content) 
 info_box = soup.find("table", {"class": "infobox vcard"})
@@ -421,7 +586,7 @@ print(str(info_box)[0:500])
 
 # Now, using the various tools we've had before, we can drill down to the specific element containing the data we need. As before, we select and print a single row to help guide the process. 
 
-# In[23]:
+# In[39]:
 
 table_elements = info_box.find_all("tr")
 one_row = table_elements[0]
@@ -430,7 +595,7 @@ print(one_row)
 
 # First, let's try to select the element containing the variable name "Type".
 
-# In[24]:
+# In[40]:
 
 print(one_row.th)
 print("")
@@ -441,7 +606,7 @@ print(one_row.th.div.text)
 
 # Next, let's select the element containing the variable value, in this case "Subsidiary". 
 
-# In[25]:
+# In[41]:
 
 print(one_row.td)
 print("")
@@ -450,7 +615,7 @@ print(one_row.td.text)
 
 # Now, let's loop through all rows to get all data that's available on the company. Depending on how well-structured the data is, this can be something of a trial and error process. 
 
-# In[26]:
+# In[42]:
 
 for one_row in table_elements:
     print(one_row.th.div.text + ": " + one_row.td.text)
@@ -458,7 +623,7 @@ for one_row in table_elements:
 
 # We get an AttributeError for the "NoneType" object due to some of the "th" elements being empty. If we do some simple Exception capturing, we can get the loop to run through. 
 
-# In[27]:
+# In[43]:
 
 for one_row in table_elements:
     try:
@@ -467,13 +632,9 @@ for one_row in table_elements:
         continue
 
 
-# #### Let's try a challenge!
-# 
-# Error handling - or having a computer program anticipate and respond to errors created by other functions - is a big part of programming. To give you a little more practice with this, we're going to have you team up with person sitting next to you and try challenge B in the challenges directory.
-
 # Now that we have the data we need, let's store it in a Python dictionary. 
 
-# In[28]:
+# In[44]:
 
 new_dict = {}
 for one_row in table_elements:
@@ -486,7 +647,7 @@ for one_row in table_elements:
 
 # We can browse the dictionary to make sure it is capturing the data correctly. 
 
-# In[29]:
+# In[45]:
 
 print(new_dict.keys())
 print(new_dict)
@@ -497,7 +658,7 @@ print(new_dict)
 # The next step is to write an overall loop so that we can collect the "infobox vcard" data for all elements in our list. info_box = soup.find("table", {"class": "infobox vcard"})
 # 
 
-# In[30]:
+# In[46]:
 
 list_of_dicts = []
 
@@ -527,7 +688,7 @@ print(len(list_of_dicts))
 
 # Let's browse our list_of_dicts object to make sure it contains the data we need. 
 
-# In[31]:
+# In[47]:
 
 print(list_of_dicts)
 
@@ -536,7 +697,7 @@ print(list_of_dicts)
 # 
 # As the entire class will be sharing the same IP, it's recommended that you add a longer wait time and limit the number of companies from link_list you scrape while in class. 
 
-# In[32]:
+# In[48]:
 
 import time 
 
@@ -571,7 +732,7 @@ for each_link in link_list[0:3]:
 # 
 # To store this data flexibly, we can iterate through all our dictionaries and collect all keys from them. 
 
-# In[33]:
+# In[49]:
 
 key_list = []
 for each_dict in list_of_dicts:
@@ -582,7 +743,7 @@ print(key_list)
 
 # Next, we convert the list to a set to remove all repeat keys. This then contains all unique keys across our dictionaries. 
 
-# In[34]:
+# In[50]:
 
 key_set = set(key_list)
 print(key_set)
@@ -590,7 +751,7 @@ print(key_set)
 
 # We convert the set back to a list (and sort it) as csv.DictWriter takes a list for its fieldnames parameter. 
 
-# In[35]:
+# In[51]:
 
 final_key_list = sorted(list(key_set))
 print(final_key_list)
@@ -598,7 +759,7 @@ print(final_key_list)
 
 # With our complete key list, we can now write our dictionary into a csv file.
 
-# In[36]:
+# In[52]:
 
 import csv
 
@@ -616,334 +777,3 @@ print("done")
 
 
 # You can open the file in Excel to view the data. Congrats, you just scraped valuable data for your project off the web!
-
-# # Creating data with web APIs
-# 
-# Most people who think they want to do web scraping actually want to pull data down from site-supplied APIs. Using an API is better in almost every way, and really the only reason to scrape data is if:
-# 
-# 1. The website was constructed in the 90s and does not have an API; or,
-# 2. You are doing something illegal
-# 
-# If [LiveJournal has an API](http://dev.livejournal.com/), the website you are interested in probably does too.
-# 
-# ## What is an API?
-# 
-# **API** is shorthand for **A**pplication **P**rogramming **I**nterface, which is in turn computer-ese for a middleman.
-# 
-# Think about it this way. You have a bunch of things on your computer that you want other people to be able to look at. Some of them are static documents, some of them call programs in real time, and some of them are programs themselves.
-# 
-# #### Solution 1
-# 
-# You publish login credentials on the internet, and let anyone log into your computer
-# 
-# Problems:
-# 
-# 1. People will need to know how each document and program works to be able to access their data
-# 
-# 2. You don't want the world looking at your browser history
-# 
-# #### Solution 2
-# 
-# You paste everything into HTML and publish it on the internet
-# 
-# Problems:
-# 
-# 1. This can be information overload
-# 
-# 2. Making things dynamic can be tricky
-# 
-# #### Solution 3
-# 
-# You create a set of methods to act as an intermediary between the people you want to help and the things you want them to have access to.
-# 
-# Why this is the best solution:
-# 
-# 1. People only access what you want them to have, in the way that you want them to have it
-# 
-# 2. People use one language to get the things they want
-# 
-# Why this is still not Panglossian:
-# 
-# 1. You will have to explain to people how to use your middleman
-# 
-
-# ## Twitter's API
-# 
-# Twitter has an API - mostly written for third-party apps - that is comparatively straightforward and gives you access to _nearly_ all of the information that Twitter has about its users, including:
-# 
-# 1. User histories
-# 
-# 2. User (and tweet) location
-# 
-# 3. User language
-# 
-# 4. Tweet popularity
-# 
-# 5. Tweet spread
-# 
-# 6. Conversation chains
-# 
-# Also, Twitter returns data to you in json, or **J**ava **S**cript **O**bject **N**otation. This is a very common format for passing data around http connections for browsers and servers, so many APIs return it as a datatype as well (instead of using something like xml or plain text).
-# 
-# Luckily, json converts into native Python data structures. Specifically, every json object you get from Twitter will be a combination of nested `dicts` and `lists`, which you learned about yesterday. This makes Twitter a lot easier to manipulate in Python than html objects, for example.
-# 
-# Here's what a tweet looks like:
-
-# In[37]:
-
-import json
-
-with open('../data/02_tweet.json','r') as f:
-    a_tweet = json.loads(f.read())
-
-
-# We can take a quick look at the structure by pretty printing it:
-
-# In[38]:
-
-from pprint import pprint
-
-pprint(a_tweet)
-
-
-# #### Time for a challenge!
-# 
-# Let's see how much you remember about lists and dicts from yesterday. Go into the challenges directory and try your hand at `02_scraping/C_json.py`.
-
-# ## Authentication
-# 
-# Twitter controls access to their servers via a process of authentication and authorization. Authentication is how you let Twitter know who you are, in a way that is very hard to fake. Authorization is how the account owner (which will usually be yourself unless you are writing a Twitter app) controls what you are allowed to do in Twitter using their account. In Twitter, different levels of authorization require different levels of authentication. 
-# 
-# Because we want to be able to interact with everything, we'll need the highest level of authorization and the strictest level of authentication. In Twitter, this means that we need two sets of ID's (called keys or tokens) and passwords (called secrets):
-# 
-# * consumer_key
-# * consumer_secret
-# * access_token_key
-# * access_token_secret
-# 
-# We'll provide some for you to use, but if you want to get your own you need to create an account on Twitter with a verified phone number. Then, while signed in to your Twitter account, go to: https://apps.twitter.com/. Follow the prompts to generate your keys and access tokens. Note that getting the second ID/password pair requires that you manually set the authorization level of your app.
-# 
-# We've stored our credentials in a separate file, which is smart. However, we have uploaded it to Github so that you have them too, which is not smart. 
-# 
-# **You should NEVER NEVER NEVER do this in real life.**
-# 
-# We've stored it in YAML format, because it is more human-readible than JSON is. However, once it's inside Python, these data structures behave the same way.
-
-# In[39]:
-
-import yaml
-
-with open('../etc/creds.yml', 'r') as f:
-    creds = yaml.load(f)
-
-
-# We're going to load these credentials into a requests module specifically designed for handling the flavor of authentication management that Twitter uses.
-
-# In[40]:
-
-from requests_oauthlib import OAuth1Session
-
-twitter = OAuth1Session(**creds)
-
-
-# That `**` syntax we just used is called a "double splat" and is a python convenience function for converting the key-value pairs of a dictionary into keyword-argument pairs to pass to a function.
-
-# ## Accessing the API
-
-# Access to Twitter's API is organized through URLs called "endpoints". An endpoint is the location at which you can submit a request for Twitter to do something for you.
-# 
-# For example, the "endpoint" to search for specific kinds of tweets is at:
-# 
-# ```
-# https://api.twitter.com/1.1/search/tweets.json
-# ```
-# 
-# whereas posting new tweets is at:
-# 
-# ```
-# https://api.twitter.com/1.1/statuses/update.json
-# ```
-# 
-# For more information on the REST APIs, end points, and terms, check out: https://dev.twitter.com/rest/public. For the Streaming APIs: https://dev.twitter.com/streaming/overview.
-# 
-# All APIs on Twitter are "rate-limited" - this means that you are only allowed to ask a set number of questions per unit time (to keep their servers from being overloaded). This rate varies by endpoint and authorization, so be sure to check their developer site for the action you are trying to take.
-# 
-# For example, at the lowest level of authorization (Twitter calls this `application only`), you are allowed to make 450 search requests per 15 minute window, or about one every two seconds. At the highest level of authorization (Twitter calls this `user`) you can submit 180 requests every 15 minutes, or only about once every five seconds.
-# 
-# > side note - Google search is the worst rate-limiting I've ever seen, with an allowance of one hundred requests per day, or about once every *nine hundred seconds*
-# 
-# Let's try a couple of simple API queries. We're going to specify query parameters with `param`.
-
-# In[41]:
-
-search = "https://api.twitter.com/1.1/search/tweets.json"
-
-r = twitter.get(search, params={'q' : 'technology'})
-
-
-# This has returned an http response object, which contains data like whether or not the request succeeded:
-
-# In[42]:
-
-r.ok
-
-
-# You can also get the http response code, and the reason why Twitter sent you that code (these are all super important for controlling the flow of your program).
-
-# In[43]:
-
-r.status_code, r.reason
-
-
-# The data that we asked Twitter to send us in r.content
-
-# In[44]:
-
-r.content
-
-
-# But that's not helpful. We can extract it in python's representation of json with the `json` method:
-
-# In[45]:
-
-r.json()
-
-
-# This has some helpful metadata about our request, like a url where we can get the next batch of results from Twitter for the same query:
-
-# In[46]:
-
-data = r.json()
-data['search_metadata']
-
-
-# The tweets that we want are under the key "statuses"
-
-# In[47]:
-
-statuses = data['statuses']
-statuses[0]
-
-
-# This is one tweet.
-# 
-# > Depending on which tweet this is, you may or may not see that Twitter automatically pulls out links and mentions and gives you their index location in the raw tweet string
-# 
-# Twitter gives you a whole lot of information about their users, including geographical coordinates, the device they are tweeting from, and links to their photographs.
-
-# Twitter supports what it calls query operators, which modify the search behavior. For example, if you want to search for tweets where a particular user is mentioned, include the at-sign, `@`, followed by the username. To search for tweets sent to a particular user, use `to:username`. For tweets from a particular user, `from:username`. For hashtags, use `#hashtag`.
-# 
-# For a complete set of options: https://dev.twitter.com/rest/public/search.
-# 
-# Let's try a more complicated search:
-
-# In[48]:
-
-r = twitter.get(search, params={
-        'q' : 'happy',
-        'geocode' : '37.8734855,-122.2597169,10mi'
-    })
-r.ok
-
-
-# In[49]:
-
-statuses = r.json()['statuses']
-statuses[0]
-
-
-# If we want to store this data somewhere, we can output it as json using the json library from above. However, if you're doing a lot of these, you'll probaby want to use a database to handle everything.
-
-# In[50]:
-
-with open('my_tweets.json', 'w') as f:
-    json.dump(statuses, f)
-
-
-# To post tweets, we need to use a different endpoint:
-
-# In[51]:
-
-post = "https://api.twitter.com/1.1/statuses/update.json"
-
-
-# And now we can pass a new tweet (remember, Twitter calls these 'statuses') as a parameter to our post request.
-
-# In[52]:
-
-r = twitter.post(post, params={
-        'status' : "I stole Juan's Twitter credentials"
-    })
-r.ok
-
-
-# Other (optional) parameters include things like location, and replies.
-
-# ## Scheduling
-
-# The real beauty of bots is that they are designed to work without interaction or oversight. Imagine a situation where you want to automatically retweet everything coming out of the D-Lab's twitter account, "@DLabAtBerkeley". You could:
-# 
-# 1. spend the rest of your life glued to D-Lab's twitter page and hitting refresh; or,
-# 2. write a function
-# 
-# We're going to import a module called `time` that will pause our code, so that we don't hit Twitter's rate limit
-
-# In[53]:
-
-import time
-
-def retweet():
-    r = twitter.get(search, {'q':'DLabAtBerkeley'})
-    if r.ok:
-        statuses = r.json()['statuses']
-        for update in statuses:
-            username = item['user']['screen_name']
-            parameters = {'status':'HOORAY! @' + username}
-            r = twitter.post(post, parameters)
-            print(r.status_code, r.reason)
-            time.sleep(5)
-
-
-# But you are a human that needs to eat, sleep, and be social with other humans. Luckily, Linux systems have a time-based daemon called `cron` that will run scripts like this *for you*. 
-# 
-# > People on windows and macs will not be able to run this. That's okay.
-# 
-# The way that `cron` works is it reads in files where each line has a time followed by a job (these are called cronjobs). You can edit your crontab by typing `crontab -e` into a terminal.
-# 
-# They looks like this:
-
-# In[54]:
-
-with open('../etc/crontab_example', 'r') as f:
-    print(f.read())
-
-
-# This is telling `cron` to print that statement to a file called "dumblog" at 8am every Monday.
-# 
-# It's generally frowned upon to enter jobs through crontabs because they are hard to modify without breaking them. The better solution is to put your timed command into a file and copy the file into `/etc/cron.d/`. These files look like this:
-
-# In[55]:
-
-with open('../etc/crond_example', 'r') as f:
-    print(f.read())
-
-
-# At this point, you might be a little upset that you can't do this on your laptop, but the truth is you don't really want to run daemons and cronjobs on your laptop, which goes to sleep and runs out of batteries. This is what servers are for (like AWS).
-
-# ## Now it is time for you to make your own twitter bot!
-# 
-# To get you started, we've put a template in the `scripts` folder. Try it out, but be generous with your `time.sleep()` calls as the whole class is sharing this account.
-# 
-# If you have tried to run this, or some of the earlier code in this notebook, you have probably encountered some of Twitter's error codes. Here are the most common, and why you are triggering them.
-# 
-# 1. `400 = bad request` - This means the API (middleman) doesn't like how you formatted your request. Check the API documentation to make sure you are doing things correctly.
-# 
-# 2. `401 = unauthorized` - This either means you entered your auth codes incorrectly, or those auth codes don't have permission to do what you're trying to do. It takes Twitter a while to assign posting rights to your auth tokens after you've given them your phone number. If you have just done this, wait five minutes, then try again.
-# 
-# 3. `403 = forbidden` - Twitter won't let you post what you are trying to post, most likely because you are trying to post the same tweet twice in a row within a few minutes of each other. Try changing your status update. If that doesn't fix it, then you are either:
-# 
-#     A. Hitting Twitter's daily posting limit. They don't say what this is.
-#         
-#     B. Trying to follow too many people, rapidly following and unfollowing the same person, or are otherwise making Twitter think you are a spambot
-# 
-# 4. `429 = too many requests` - This means that you have exceeded Twitter's rate limit for whatever it is you are trying to do. Increase your  `time.sleep()`  value.

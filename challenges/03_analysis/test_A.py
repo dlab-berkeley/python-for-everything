@@ -1,17 +1,16 @@
 #!/bin/env python
 
+import json
 import pytest
-import re
 
-import A_re as A
+import A_json as A
 
-def test_pattern():
-    assert re.search(A.P_URL, 'http://www.npr.org')
-    assert not re.search(A.P_URL, 'Mr.DillonNiederhut')
+def test_load():
+    with open('../../data/02_tweet.json', 'r') as f:
+        test_data = json.load(f)
+    assert A.tweet == test_data
 
-def test_function():
-    with open('../../data/03_text.md', 'r') as f:
-        d = f.read()
-    r = A.get_urls(d)
-    assert len(r) == 28
-    assert r[0] == 'https://github.com'
+def test_entity_getter():
+    test_data = list(A.entity_getter(A.tweet))
+    assert {'description': {'urls': []}} in test_data
+    assert {'hashtags': [], 'symbols': [], 'urls': [], 'user_mentions': []} in test_data
