@@ -1,10 +1,6 @@
----
-Title : Python for Everything
-Author :
-    - Dillon Niederhut
-    - Juan Shishido
-    - Andrew Chong
----
+# Python for Everything
+
+=========================
 
 This repository holds all of the necessary materials, code, and data for D-Lab's complete introduction to the Python Language.
 
