@@ -26,7 +26,7 @@ The workshop duration is 3hrs per day. Many students like to hang around for a b
 
 **knowledge requirements** : [Programming Fun!damentals](https://github.com/dlab-berkeley/programming-fundamentals), or equivalent prior knowledge
 
-**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) or its equivalent. The [PyCharm IDE](https://www.jetbrains.com/pycharm-edu/download/),  is recommended, but not required
+**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) and a plain text editor or IDE following [these directions](http://python.berkeley.edu/learn/).
 
 ## Part 1
 
@@ -36,7 +36,7 @@ The workshop duration is 3hrs per day. Many students like to hang around for a b
 
 **knowledge requirements** : Python for Everything Part 0, or equivalent prior knowledge
 
-**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) or its equivalent. The [PyCharm IDE](https://www.jetbrains.com/pycharm-edu/download/),  is recommended, but not required
+**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) and a plain text editor or IDE following [these directions](http://python.berkeley.edu/learn/).
 
 ## Part 2
 
@@ -46,7 +46,7 @@ The workshop duration is 3hrs per day. Many students like to hang around for a b
 
 **knowledge requirements** : Python for Everything Part 1, or equivalent prior knowledge
 
-**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) or its equivalent. The [PyCharm IDE](https://www.jetbrains.com/pycharm-edu/download/),  is recommended, but not required
+**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) and a plain text editor or IDE following [these directions](http://python.berkeley.edu/learn/).
 
 ## Part 3
 
@@ -56,7 +56,7 @@ The workshop duration is 3hrs per day. Many students like to hang around for a b
 
 **knowledge requirements** : Python for Everything Part 2, or equivalent prior knowledge
 
-**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) or its equivalent. The [PyCharm IDE](https://www.jetbrains.com/pycharm-edu/download/),  is recommended, but not required
+**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) and a plain text editor or IDE following [these directions](http://python.berkeley.edu/learn/).
 
 ## Part 4
 
@@ -66,4 +66,4 @@ The workshop duration is 3hrs per day. Many students like to hang around for a b
 
 **knowledge requirements** : Python for Everything Part 3, or equivalent prior knowledge
 
-**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) or its equivalent. The [PyCharm IDE](https://www.jetbrains.com/pycharm-edu/download/),  is recommended, but not required
+**tech requirements** : Laptop required; please install the [Anaconda distribution of Python 3](https://www.continuum.io/downloads) and a plain text editor or IDE following [these directions](http://python.berkeley.edu/learn/). 
