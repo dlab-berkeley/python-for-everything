@@ -22,3 +22,4 @@ def test_stemmer():
 
 def test_stop_words():
     assert type(B.stop_list) is list
+    assert len(B.stop_list) == 10
