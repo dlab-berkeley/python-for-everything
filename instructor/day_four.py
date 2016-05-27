@@ -111,11 +111,13 @@ re.findall(r'\[[a-zA-Z]+\]', document)[0:10]
 
 # In[9]:
 
-snippet = 'This is [cough cough] and example of a [really] greedy operator'
+snippet = 'This is [cough cough] an example of a [really] greedy operator'
 re.findall(r'\[.+\]', snippet)
 
 
 # Since the operator is greedy, it is matching everything inbetween the first open and the last close bracket. To make `+` consume the least possible amount of string, we'll add a `?`.
+# 
+# > side note - regex workflows typically use `re.compile`, as this allows you to set options called flags that can reduce the verbosity of your pattern, like `re.I` for 'ignore case'.
 
 # In[10]:
 
@@ -166,6 +168,19 @@ match
 match.group('name'), match.group('line')
 
 
+# We can also list and count all the unique characters.
+
+# In[14]:
+
+matches = re.findall(p, document)
+chars = set([x[0] for x in matches])
+
+
+# In[15]:
+
+print (chars, len(chars))
+
+
 # #### Now let's try a small challenge!
 # 
 # To check that you've understood something about regular expressions, we're going to have you do a small test challenge. Partner up with the person next to you - we're going to do this as a pair coding exercise - and choose which computer you are going to use.
@@ -176,7 +191,7 @@ match.group('name'), match.group('line')
 # 
 # Let's grab Arthur's speech from above, and see what we can learn about Arthur from it.
 
-# In[14]:
+# In[16]:
 
 p = re.compile(r'(?:ARTHUR: )(.+)')
 arthur = ' '.join(re.findall(p, document))
@@ -185,7 +200,7 @@ arthur[0:100]
 
 # In our model for natural language, we're interested in words. The document is currently a continuous string of bytes, which isn't ideal. You might be tempted to separate this into words using your newfound regex knowledge:
 
-# In[15]:
+# In[17]:
 
 p = re.compile(r'\w+', flags=re.I)
 re.findall(p, arthur)[0:10]
@@ -193,22 +208,23 @@ re.findall(p, arthur)[0:10]
 
 # But this is problematic for languages that make extensive use of punctuation. For example, see what happens with:
 
-# In[16]:
+# In[18]:
 
 re.findall(p, "It isn't Dav's cheesecake that I'm worried about")
 
 
 # The practice of pulling apart a continuous string into units is called "tokenizing", and it creates "tokens". NLTK, the canonical library for NLP in Python, has a couple of implementations for tokenizing a string into words.
 
-# In[17]:
+# In[19]:
 
+#nltk.download('punkt')
 from nltk import word_tokenize
 word_tokenize("It isn't Dav's cheesecake that I'm worried about")
 
 
 # The distinction here is subtle, but look at what happened to "isn't". It's been separated into "IS" and "N'T", which is more in keeping with the way contractions work in English.
 
-# In[18]:
+# In[20]:
 
 tokens = word_tokenize(arthur)
 tokens[0:10]
@@ -216,7 +232,7 @@ tokens[0:10]
 
 # At this point, we can start asking questions like what are the most common words, and what words tend to occur together.
 
-# In[19]:
+# In[21]:
 
 len(tokens), len(set(tokens))
 
@@ -229,21 +245,32 @@ len(tokens), len(set(tokens))
 # 
 # For more complicated metrics, it's easier to use NLTK's classes and methods.
 
-# In[20]:
+# In[22]:
 
 from nltk import collocations
 fd = collocations.FreqDist(tokens)
 fd.most_common()[:10]
 
 
-# In[21]:
+# Let's remove puntuation and stopwords.
+
+# In[23]:
+
+from string import punctuation
+from nltk.corpus import stopwords
+tokens_reduced = [x for x in tokens if x not in punctuation and x not in stopwords.words('english')]
+fd2 = collocations.FreqDist(tokens_reduced)
+fd2.most_common()[:10]
+
+
+# In[24]:
 
 measures = collocations.BigramAssocMeasures()
 c = collocations.BigramCollocationFinder.from_words(tokens)
 c.nbest(measures.pmi, 10)
 
 
-# In[22]:
+# In[25]:
 
 c.nbest(measures.likelihood_ratio, 10)
 
@@ -260,31 +287,31 @@ c.nbest(measures.likelihood_ratio, 10)
 # 
 # Just like the tokenizers, we first have to create a stemmer object with the language we are using.
 
-# In[23]:
+# In[26]:
 
 snowball = nltk.SnowballStemmer('english')
 
 
 # Now, we can try stemming some words
 
-# In[24]:
+# In[27]:
 
 snowball.stem('running')
 
 
-# In[25]:
+# In[28]:
 
 snowball.stem('eats')
 
 
-# In[26]:
+# In[29]:
 
 snowball.stem('embarassed')
 
 
 # Snowball is a very fast algorithm, but it has a lot of edge cases. In some cases, words with the same stem are reduced to two different stems.
 
-# In[27]:
+# In[30]:
 
 snowball.stem('cylinder'), snowball.stem('cylindrical')
 
@@ -293,59 +320,73 @@ snowball.stem('cylinder'), snowball.stem('cylindrical')
 # 
 # > This is sometimes referred to as a 'collision'
 
-# In[28]:
+# In[31]:
 
 snowball.stem('vacation'), snowball.stem('vacate')
 
 
-# In[29]:
+# In[32]:
 
 snowball.stem('organization'), snowball.stem('organ')
 
 
-# In[30]:
+# In[33]:
 
 snowball.stem('iron'), snowball.stem('ironic')
 
 
-# In[31]:
+# In[34]:
 
 snowball.stem('vertical'), snowball.stem('vertices')
 
 
 # A more accurate approach is to use an English word bank like WordNet to call dictionary lookups on word forms, in a process called lemmatization.
 
-# In[32]:
+# In[35]:
 
 # nltk.download('wordnet')
 wordnet = nltk.WordNetLemmatizer()
 
 
-# In[33]:
+# In[36]:
 
 wordnet.lemmatize('iron'), wordnet.lemmatize('ironic')
 
 
-# In[34]:
+# In[37]:
 
 wordnet.lemmatize('vacation'), wordnet.lemmatize('vacate')
 
 
 # Nothing comes for free, and you've probably noticed already that the lemmatizer is slower. We can see how much slower with one of IPYthon's `magic functions`.
 
-# In[35]:
+# In[38]:
 
 get_ipython().magic("timeit wordnet.lemmatize('table')")
 
 
-# In[36]:
+# In[39]:
 
 4.45 * 5.12
 
 
-# In[37]:
+# In[40]:
 
 get_ipython().magic("timeit snowball.stem('table')")
+
+
+# Other cool things you can do with WordNet include hypernyms and hyponyms.
+
+# In[41]:
+
+from nltk.corpus import wordnet as wn
+dog = wn.synset('dog.n.01')
+dog.hypernyms()
+
+
+# In[42]:
+
+dog.hyponyms()
 
 
 # #### Time for another small challenge!
@@ -362,17 +403,17 @@ get_ipython().magic("timeit snowball.stem('table')")
 # 
 # We're going to use TextBlob's built-in sentiment classifier, because it is super easy.
 
-# In[38]:
+# In[43]:
 
 from textblob import TextBlob
 
 
-# In[39]:
+# In[44]:
 
 blob = TextBlob(arthur)
 
 
-# In[40]:
+# In[45]:
 
 for sentence in blob.sentences[10:25]:
     print(sentence.sentiment.polarity, sentence)
@@ -386,14 +427,14 @@ for sentence in blob.sentences[10:25]:
 # 
 # Luckily for us there is another python library that takes care of the heavy lifting for us.
 
-# In[41]:
+# In[46]:
 
 from gensim import corpora, models, similarities
 
 
 # We already have a document for Arthur, but let's grab the text from someone else to compare it with.
 
-# In[42]:
+# In[47]:
 
 p = re.compile(r'(?:GALAHAD: )(.+)')
 galahad = ' '.join(re.findall(p, document))
@@ -403,7 +444,7 @@ galahad_tokens = word_tokenize(galahad)
 
 # Now, we use gensim to create vectors from these tokenized documents:
 
-# In[43]:
+# In[48]:
 
 dictionary = corpora.Dictionary([arthur_tokens, galahad_tokens])
 corpus = [dictionary.doc2bow(doc) for doc in [arthur_tokens, galahad_tokens]]
@@ -412,7 +453,7 @@ tfidf = models.TfidfModel(corpus, id2word=dictionary)
 
 # Then, we create matrix models of our corpus and query
 
-# In[44]:
+# In[49]:
 
 query = tfidf[dictionary.doc2bow(['peasant'])]
 index = similarities.MatrixSimilarity(tfidf[corpus])
@@ -420,7 +461,7 @@ index = similarities.MatrixSimilarity(tfidf[corpus])
 
 # And finally, we can test our query, "peasant" on the two documents in our corpus
 
-# In[45]:
+# In[50]:
 
 list(enumerate(index[query]))
 
@@ -435,8 +476,3 @@ list(enumerate(index[query]))
 # 
 # 1. Is King Arthur happier than Sir Robin, based on his speech?
 # 2. Which character in Monty Python has the biggest vocabulary?
-
-# In[46]:
-
-
-
