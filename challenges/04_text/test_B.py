@@ -9,7 +9,7 @@ import B_stemming as B
 def test_token():
     truth = hasattr(B, 'nltk') + hasattr(B, 'word_tokenize') + hasattr(B, 'wordpunct_tokenize')
     assert truth > 0
-    assert len(B.token_list) >= 670
+    assert len(B.token_list) >= 400
 
 def test_stemmer():
     fp = '../../data/stemmed_document.json'
