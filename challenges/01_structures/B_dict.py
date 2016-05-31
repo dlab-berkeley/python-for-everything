@@ -1,22 +1,13 @@
-# In this challenge, we'll work with dictionaries
-# Remember to make sure the tests pass
+#!/bin/env python
 
+# Welcome back to the Ministry of Silly Functions! Our second challenge
+# of the day is going to be about dictionaries!
 
-# count the number of unique values in the given dict
-def dict_unique_values():
-    d = {'a' : 1, 'b' : 0, 'c' : 1, 'd' : 2, 'e' : 3}
-    # recall how to access dictionary values
-    return None
+## 1. Write a function that counts the number of unique values in a dictionary
+def unique_values():
+    pass
 
-# make a given dictionary nested
-def dict_make_it_nested():
-    e = {'zero' : 0, 'one' : 1}
-    # add a key named 'two' whose value is a dict
-    # the nested dict should include a key named 'deep'
-    # any value for this nested dict is fine
-    return None
-
-# determine whether an arbitrary key is part of an arbitrary dict
+## 2. Write a functino that determines whether a key is in a dictionary
 def dict_key_check(k, f):
     """Check whether key `k` is in dict `f`.
     The keys in `f` will always be lowercase
@@ -33,4 +24,4 @@ def dict_key_check(k, f):
     -------
     bool
     """
-    return None
+    pass

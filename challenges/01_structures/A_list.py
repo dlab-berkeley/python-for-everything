@@ -1,22 +1,28 @@
-# In this challenge, we'll work with lists
-# Remember to make sure the tests pass
+#!/bin/env python
+
+# Welcome to the Ministry of Silly Functions! We'll start our first challenge of the day by doing some fun things with lists!
+
+## 1. Write a function that inserts "In the name of Arthur of the House
+## Pendragon, the first of his name, King of the Britons, Defeater of
+## the Saxons, and Sovereign of all England:" to the *beginning* of a list
+
+def prepend_arthur():
+    pass
+
+## 2. Write a function that returns only the second half of a list
+
+def get_second_half():
+    pass
+
+## 3. Write a function that calculates the average value in a list
+
+def get_mean():
+    pass
 
 
-# count the number of 1s in the given list
-def list_count_ones():
-    a = [1, 8, 6, 7, 5, 3, 0, 9, 1]
-    # we have not covered the list method with this functionality
-    return None
-
-# calculate the average value of the given list
-def list_mean():
-    b = [0, 3, 4, 7]
-    # use functions you're familiar with
-    # watch out for division
-    return None
-
-# finally, let's count the number of elements less than 3
-def list_lt3():
-    c = [5, 9, 0, -1, 6, 3, 2, 1]
-    # making use of list methods will be useful here
-    return None
+## The stuff below here is okay -- no need to fix it!
+if __name__ == '__main__':
+    text_list = ["We dine well here in Camelot", "We eat ham and jam and Spam a lot"]
+    text_list = prepend_arthur(text_list)
+    for line in text_list:
+        print(line)
