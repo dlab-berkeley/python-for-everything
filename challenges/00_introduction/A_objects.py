@@ -2,10 +2,10 @@
 
 # Welcome to your first challenge!
 
-## First, we're going to check that you have the right version
-## of python installed
+## 1. We're going to check that you have the right version
+## of python installed. You don't need to change this!
 
 import sys
 version = sys.version_info
 
-## Second, assign a floating point number to the name dillon
+## 2. Assign a floating point number to the name dillon

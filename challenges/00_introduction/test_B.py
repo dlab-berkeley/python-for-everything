@@ -1,9 +1,12 @@
+import inspect
 import pytest
 
 import B_syntax as B
 
-def test_chapman():
-    B.chapman()
+def test_numbers():
+    assert isinstance(B.counting_numbers, str)
+    assert 'three' in B.counting_numbers
 
-def test_colbert():
-    B.colbert()
+def test_arthur():
+    assert inspect.signature(B.arthurify).parameters
+    assert B.arthurify('three four') == 'five four'
