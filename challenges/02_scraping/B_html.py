@@ -1,21 +1,30 @@
 #!/bin/env python
 
-# In this challenge, you are going to practice handling HTML formatted data
-
-## 1. Use requests to download the page at "isitchristmas.com"
-
 import requests
+from bs4 import BeautifulSoup
 
-page = get('http://isitchristmas.com')
+# In this challenge, you are going to practice handling HTML data by
+# grabbing the data out of a page that tells you the time
 
-## 2. Pull out the title and any paragraphs of the site
+## 1. Write a function that downloads the page at "whattimeisit.com"
+## and returns it as a response object
 
-title =
+def get_page():
+    pass
 
-text =
+## 2. Write a function that accepts a response object, and returns the
+## time as a string
 
-## 3. Pull out the site header, and join all of the elements in the head into a single text string.
+def get_time():
+    pass
 
-header = ' '.join(things_in_head_object)
+## The stuff below here is okay -- no need to fix it!
+if __name__ == '__main__':
 
-## 4. Compare the length of the header to the length of the text - what do you notice? If you really want to blow your mind, open this up in a browser and compare the human-rendered version with the source code.
+    page = get_page()
+    print(get_time(page))
+    print("""\n\n
+    ## If you really want to blow your mind, open up 'isitchristmas.com'
+    ## in a browser and compare the human-rendered version with the
+    ## source code.
+    """)

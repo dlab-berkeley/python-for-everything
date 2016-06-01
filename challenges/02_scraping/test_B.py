@@ -1,21 +1,17 @@
 #!/bin/env python
 
 import pytest
+import re
 
 import B_html as B
 
 def test_page():
-    page = B.page
+    page = B.get_page()
     assert page.ok
-    assert page.url == 'https://isitchristmas.com/'
-    assert 'Built by Eric Mill' in page.text
+    assert 'http://www.whattimeisit.com/' in page.url
 
-def test_text():
-    assert B.title in [
-    'Is it Christmas?',
-    '<title>Is it Christmas?</title>',
-    ]
-    assert not B.text
-
-def test_header():
-    assert len(B.header) == 90
+def test_time():
+    page = B.get_page()
+    time = B.get_time(page)
+    assert isinstance(time, str)
+    assert re.search(r'[0-9]+:[0-9]+', time)
