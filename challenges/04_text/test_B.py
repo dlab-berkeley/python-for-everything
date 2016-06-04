@@ -6,20 +6,21 @@ import pytest
 
 import B_stemming as B
 
-def test_token():
-    truth = hasattr(B, 'nltk') + hasattr(B, 'word_tokenize') + hasattr(B, 'wordpunct_tokenize')
-    assert truth > 0
-    assert len(B.token_list) >= 400
+def test_get_tokens():
+    assert len(B.get_tokens("Hey, this isn't a test!")) >= 6
 
-def test_stemmer():
-    fp = '../../data/stemmed_document.json'
-    assert os.path.isfile(fp)
-    with open(fp, 'r') as f:
-        d = json.load(f)
-    assert len(d) == len(B.token_list)
-    for unstemmed_word in ['fundamentals', 'discover', 'very', 'secure']:
-        assert unstemmed_word not in d
+def test_get_stems():
+    assert B.get_stems(['tries', 'fanned', 'runs']) == ['tri', 'fan', 'run']
 
 def test_stop_words():
-    assert type(B.stop_list) is list
-    assert len(B.stop_list) == 10
+    with open('../../data/04_text.md', 'r') as f:
+        document = f.read()
+    stopwords = B.get_stopwords(B.get_stems(B.get_tokens(document)))
+    assert len(stopwords) == 10
+    for word in ['for', 'the', '#', 'http', '[', ']', '-', ':', '(', ')']:
+        assert word in stopwords
+
+def test_remove_stopwords():
+    document = "The man bought Alice in Wonderland, a book for children, but which is really for the mathematically inclined adult".split()
+    stopwords = ["the", "and", "for"]
+    assert len(B.remove_stopwords(stopwords, document)) == 15

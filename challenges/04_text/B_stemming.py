@@ -1,20 +1,40 @@
 #!/bin/env python
 
-# In this challenge, we are going to prepare a document for processing
+# In natural language processing, a stop word is a functional word that
+# doesn't contain much meaning, like 'the' or 'for'. These also tend to
+# be the most common words, which means they don't add much to the analysis
+# but take up a lot of memory and processing time. In this challenge, we
+# are going to use a sample of text to generate our own list of stop words
+# that we can remove from documents in the future.
 
-with open('../../data/03_text.md', 'r') as f:
-    document = f.read()
+## 1. Write a function that tokenizes a document using NLTK's
+## word tokenizer
 
-# 1. Tokenize this document using one of NLTK's built-in functions
+def get_tokens():
+    pass
 
-from nltk import something
-token_list = tokenize(document)
+## 2. Write a function that stems a list of tokens using NLTK's Snowball
+## stemmer and returns a list of stems.
 
-# 2. Stem this document using the Snowball Stemmer, and serialize it to disk
-# under the data folder as 'stemmed_document.json'
+def get_stems():
+    pass
 
-from nltk import something_else
-stem_list = stemmed token_list # use list comprehension here?
-write stem_list to json
+## 3. Write a function that takes a list of stems, finds the ten most
+## common items, and returns them as a list
 
-# 3. Find the ten most common terms and put them in an object called 'stop_list'
+def get_stopwords():
+    pass
+
+## 4. Write a function accepts a list of stems and a list of stop words,
+## removes those stop words from the list of stems, and returns the cleaned
+## list.
+
+def remove_stopwords(stopwords, document):
+    pass
+
+## The stuff below here is okay -- no need to fix it!
+if __name__ == '__main__':
+    print("""
+    This module is meant to be imported into python, and has no
+    command line interface
+    """)
