@@ -4,7 +4,7 @@
 # of the day is going to be about loops!
 
 ## 1. Write a function that turns the items in a list into keys in a
-## dictionary, then returns the dictionary.
+## dictionary (with values set to None), then returns the dictionary.
 
 def list_to_dict(L):
     pass
